@@ -1,0 +1,24 @@
+{
+  "name": "js-complexity-viz",
+  "version": "0.0.1",
+  "description": "Javascript complexity visualization",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/js-complexity-viz.git"
+  },
+  "keywords": [
+    "code", "complexity", "code complexity",
+    "js", "javascript"
+  ],
+  "dependencies": {
+    "cli-color": "*",
+    "sprintf": "*",
+    "optimist": "*",
+    "custom-logger": "*",
+    "complexity-report": "*"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
