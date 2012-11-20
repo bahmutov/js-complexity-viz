@@ -74,4 +74,20 @@ allJsFiles.forEach(function(filename) {
 
 var prettyjson = require('prettyjson');
 // console.log(complexityMetrics);
-console.log(prettyjson.render(complexityMetrics));
+// console.log(prettyjson.render(complexityMetrics));
+var out = [];
+out.push(["File", "LOC", "Cyclomatic", "Maintainability"]);
+
+complexityMetrics.forEach(function(metric) {
+	// console.log(JSON.stringify(metric, null, 2));
+
+	out.push([
+		metric.name,
+		metric.complexity.aggregate.complexity.sloc.logical,
+		metric.complexity.aggregate.complexity.cyclomatic,
+		metric.complexity.maintainability
+		]);
+});
+var filename = "report.json";
+fs.writeFileSync(filename, JSON.stringify(out, null, 2), "utf-8");
+log.info("Saved metrics to", filename);

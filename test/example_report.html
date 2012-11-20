@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>
-      Google Visualization API Sample
+      JS Complexity
     </title>
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -10,10 +10,11 @@
       google.load('visualization', '1', {packages: ['corechart']});
     </script>
     <script type="text/javascript">
-    require(['dojo/json', 'dojo/text!/git/js-complexity-viz/test/example_data.json'], 
+    require(['dojo/json', 'dojo/text!/git/js-complexity-viz/report.json'], 
       function(JSON, data)
       {
         console.log("loaded json data");
+        var fileInfoHeight = 100;
         var data = JSON.parse(data);
 
         function drawVisualization() {
@@ -23,7 +24,7 @@
         draw(dataTable,
          {
           title: "JavaScript code complexity",
-          width:600, height: (data.length - 1) * 100,
+          width:800, height: (data.length - 1) * fileInfoHeight,
           hAxis: {title: "Metric"}
         });
       }
