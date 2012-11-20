@@ -1,0 +1,17 @@
+[
+    [
+        "File",
+        "LOC",
+        "Maintainability"
+    ],
+    [
+        "js-complexity-viz.js",
+        78,
+        122
+    ],
+    [
+        "test\\filenames.js",
+        19,
+        135
+    ]
+]
