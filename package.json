@@ -16,7 +16,8 @@
     "sprintf": "*",
     "optimist": "*",
     "custom-logger": "*",
-    "complexity-report": "*"
+    "complexity-report": "*",
+    "prettyjson": "*"
   },
   "engines": {
     "node": ">= 0.8.0"

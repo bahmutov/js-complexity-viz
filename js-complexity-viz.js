@@ -67,8 +67,11 @@ allJsFiles.forEach(function(filename) {
 	var report = cr.run(source);
 	// console.log(filename, '\n', report);
 	complexityMetrics.push({
-		name: filename,
+		name: path.relative(args.path, filename),
 		complexity: report
 	});
 });
-console.dir(complexityMetrics);
+
+var prettyjson = require('prettyjson');
+// console.log(complexityMetrics);
+console.log(prettyjson.render(complexityMetrics));
