@@ -91,3 +91,9 @@ complexityMetrics.forEach(function(metric) {
 var filename = "report.json";
 fs.writeFileSync(filename, JSON.stringify(out, null, 2), "utf-8");
 log.info("Saved metrics to", filename);
+
+filename = path.resolve("test\\example_report.html");
+out = fs.readFileSync(filename, "utf-8");
+filename = "report.html";
+fs.writeFileSync(filename, out, "utf-8");
+log.info("Saved report html to", filename);

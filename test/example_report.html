@@ -4,35 +4,55 @@
     <title>
       JS Complexity
     </title>
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('visualization', '1', {packages: ['corechart']});
     </script>
     <script type="text/javascript">
-    require(['dojo/json', 'dojo/text!/git/js-complexity-viz/report.json'], 
-      function(JSON, data)
-      {
-        console.log("loaded json data");
-        var fileInfoHeight = 100;
-        var data = JSON.parse(data);
+      require(["dojo/request", "dojo/io-query"], function(request, ioQuery) {
+        var uri = window.location.search;
+        var query = uri.substring(uri.indexOf("?") + 1, uri.length);
+        var queryObject = ioQuery.queryToObject(query);
+        var reportUrl = (queryObject.report || "report.json");
+
+        var data = [];
 
         function drawVisualization() {
+          console.log("Drawing", data.length, "data points");
           var dataTable = google.visualization.arrayToDataTable(data);
 
-        new google.visualization.BarChart(document.getElementById('visualization')).
-        draw(dataTable,
-         {
-          title: "JavaScript code complexity",
-          width:800, height: (data.length - 1) * fileInfoHeight,
-          hAxis: {title: "Metric"}
-        });
-      }
-      google.setOnLoadCallback(drawVisualization);
-    });
+          var fileInfoHeight = 100;
+          new google.visualization.BarChart(document.getElementById('visualization')).
+          draw(dataTable,
+          {
+            title: "JavaScript code complexity",
+            width:"100%", height: (data.length - 1) * fileInfoHeight,
+            hAxis: {title: "Metric"}
+          });
+        }
+
+        function loadData() {
+          console.log("viz library loaded, loading data");
+          request(reportUrl).then(
+            function(text) {
+              console.log("loaded json data from", reportUrl);
+              
+              data = JSON.parse(text);
+              drawVisualization();
+            },
+            function(error){
+              console.error("An error occurred: " + error);
+            }
+          );
+        }
+
+        google.setOnLoadCallback(loadData);
+      });
     </script>
   </head>
   <body>
     <div id="visualization"></div>
+    <small>Usage: open in the browser this document, pass report.json using ?report=<i>path.json</i></small>
   </body>
 </html>
