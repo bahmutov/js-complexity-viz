@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+var cr = require('complexity-report');
 
 var optimist = require("optimist");
 var args = optimist.usage("Visualize JS files complexity.\nUsage: $0")
@@ -43,7 +44,7 @@ function collectJsFiles(folder) {
 	var files = fs.readdirSync(folder);
 	files.forEach(function(filename) {
 		if (filename.match(js)) {
-			filename = path.resolve(filename);
+			filename = path.resolve(folder, filename);
 			allJsFiles.push(filename);
 		} else {
 			try {
@@ -60,4 +61,14 @@ collectJsFiles(args.path);
 log.debug("found", allJsFiles.length, "js files");
 log.debug(allJsFiles);
 
-
+var complexityMetrics = [];
+allJsFiles.forEach(function(filename) {
+	var source = fs.readFileSync(filename, "utf-8");
+	var report = cr.run(source);
+	// console.log(filename, '\n', report);
+	complexityMetrics.push({
+		name: filename,
+		complexity: report
+	});
+});
+console.dir(complexityMetrics);
