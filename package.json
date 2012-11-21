@@ -20,13 +20,13 @@
     "prettyjson": "*"
   },
   "devDependencies": {
-      "gt": "*"
+      "qunit": "*"
   },
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts" : { 
-    "test": "gt test/filenames.js"
+    "test": "qunit -c ./test/filenames.js -t ./test/filenames.js"
   },
   "license": "MIT"
 }
