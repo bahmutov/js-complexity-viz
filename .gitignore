@@ -2,3 +2,5 @@
 /test/cover
 /report.html
 /report.json
+/cover
+/test/report.json
