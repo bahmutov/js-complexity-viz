@@ -1,6 +1,8 @@
 js-complexity-viz
 =================
 
+[![Build status][ci-image]][ci-status]
+
 JavaScript source code visualization runner using node.js
 
 This is a runner/wrapper around Phil Booth's tool [*complexity report*](https://github.com/philbooth/complexityReport.js "Complexity report at github")
