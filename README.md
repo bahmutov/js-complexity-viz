@@ -31,3 +31,6 @@ Contact
 =======
 
 Gleb Bahmutov <gleb.bahmutov@gmail.com>
+
+[ci-image]: https://secure.travis-ci.org/bahmutov/js-complexity-viz.png?branch=master
+[ci-status]: http://travis-ci.org/#!/bahmutov/js-complexity-viz
