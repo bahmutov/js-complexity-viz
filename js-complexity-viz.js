@@ -7,14 +7,16 @@ var args = optimist.usage("Visualize JS files complexity.\nUsage: $0")
 		.default({
 			help: 0,
 			path: ".",
-			log: 1
-		}).alias('h', 'help').alias('p', 'path')
-		.string("path")
+			log: 1,
+			report: "report.json"
+		}).alias('h', 'help').alias('p', 'path').alias('r', 'report')
+		.string("path").string("report")
 		.describe("path", "input folder with JS files")
 		.describe("log", "logging level: 0 - debug, 1 - info")
+		.describe("report", "name of the output report file")
 		.argv;
 
-if (args.h || args.help) {
+if (args.h || args.help || args["?"]) {
 	optimist.showHelp();
 	process.exit(0);
 }
@@ -36,6 +38,12 @@ global.log = log;
 
 console.assert(args.path, "empty path");
 log.info("looking for js files in folder", args.path);
+
+var json = /\.json$/i;
+if (!args.report.match(json)) {
+	log.error("output report filename", args.report, "is not json");
+	process.exit(1);
+}
 
 var js = /\.js$/i;
 
@@ -88,13 +96,17 @@ complexityMetrics.forEach(function(metric) {
 		metric.complexity.maintainability
 		]);
 });
-var filename = "report.json";
+var filename = args.report;
+log.debug("output report filename", filename);
 fs.writeFileSync(filename, JSON.stringify(out, null, 2), "utf-8");
 log.info("Saved metrics to", filename);
 
 filename = path.resolve(path.dirname(process.argv[1]), "test\\example_report.html");
 log.debug("template report path", filename);
 out = fs.readFileSync(filename, "utf-8");
-filename = "report.html";
+
+
+filename = args.report.replace(json, ".html");
+log.debug("output html report filename", filename);
 fs.writeFileSync(filename, out, "utf-8");
 log.info("Saved report html to", filename);
