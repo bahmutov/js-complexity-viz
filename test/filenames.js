@@ -17,3 +17,11 @@ test("not JS file", function () {
 	ok(!"js".match(js), "js is NOT js file");
 	ok(!"js.foo".match(js), "js.foo is NOT js file");
 });
+
+test("string comparison", function () {
+	var a = 'c:\git\js-complexity-viz\test\filenames.js';
+	var b = 'c:\git\js-complexity-viz\test\filenames.js';
+	equal(a, b, "same names");
+	ok(a === b, "same names using ===");
+	ok(a == b, "same names using ==");
+});

@@ -8,12 +8,14 @@ var args = optimist.usage("Visualize JS files complexity.\nUsage: $0")
 			help: 0,
 			path: ".",
 			log: 1,
-			report: "report.json"
-		}).alias('h', 'help').alias('p', 'path').alias('r', 'report')
-		.string("path").string("report")
+			report: "report.json",
+			skip: []
+		}).alias('h', 'help').alias('p', 'path').alias('r', 'report').alias('s', 'skip')
+		.string("path").string("report").string("skip")
 		.describe("path", "input folder with JS files")
 		.describe("log", "logging level: 0 - debug, 1 - info")
 		.describe("report", "name of the output report file")
+		.describe("skip", "filename or folder to skip, use multiple time if necessary")
 		.argv;
 
 if (args.h || args.help || args["?"]) {
@@ -45,15 +47,46 @@ if (!args.report.match(json)) {
 	process.exit(1);
 }
 
-var js = /\.js$/i;
+(function prepareExcludedFilenames() {
+	if (!Array.isArray(args.skip)) {
+		args.skip = [args.skip];
+	}
+	log.debug("preparing excluded paths", args.skip);
+	args.skip.forEach(function(name, index) {
+		var fullname = path.resolve(args.path, name);
+		fullname = fullname.toLowerCase();
+		args.skip[index] = fullname;
+	});
+	log.debug("excluded files", args.skip);
+}());
 
-var allJsFiles = [];
+function isJsExcluded(filename) {
+	console.assert(Array.isArray(args.skip), "args.skip should be an array");
+
+	// assuming both files are lowercase
+	var found = false;
+	args.skip.forEach(function(name) {
+		if (filename === name) {
+			found = true;
+			return;
+		}
+	});
+	return found;
+}
+
+var js = /\.js$/i;
+var allJsFiles = []; 
 function collectJsFiles(folder) {
 	var files = fs.readdirSync(folder);
 	files.forEach(function(filename) {
 		if (filename.match(js)) {
 			filename = path.resolve(folder, filename);
-			allJsFiles.push(filename);
+			filename = filename.toLowerCase();
+			if (!isJsExcluded(filename)) {
+				allJsFiles.push(filename);
+			} else {
+				log.info("skipping file", filename);
+			}
 		} else {
 			try {
 				var stats = fs.lstatSync(filename);
@@ -81,14 +114,10 @@ allJsFiles.forEach(function(filename) {
 });
 
 var prettyjson = require('prettyjson');
-// console.log(complexityMetrics);
-// console.log(prettyjson.render(complexityMetrics));
 var out = [];
 out.push(["File", "LOC", "Cyclomatic", "Maintainability"]);
 
 complexityMetrics.forEach(function(metric) {
-	// console.log(JSON.stringify(metric, null, 2));
-
 	out.push([
 		metric.name,
 		metric.complexity.aggregate.complexity.sloc.logical,
