@@ -147,30 +147,50 @@ function computeMetrics(filenames) {
 			metric.name,
 			metric.complexity.aggregate.complexity.sloc.logical,
 			metric.complexity.aggregate.complexity.cyclomatic,
-			metric.complexity.maintainability
+			Math.round(metric.complexity.maintainability)
 			]);
 	});
 	return out;
 }
 
+var metrics = computeMetrics(allJsFiles);
+check.verifyArray(metrics, "complexity metrics not an array");
+// first object - titles
+console.assert(metrics.length === allJsFiles.length + 1, "output array size", metrics.length, "!== number of files", allJsFiles.length);
+
 // output complexity report
 (function(){
-	var out = computeMetrics(allJsFiles);
-	check.verifyArray(out, "complexity metrics not an array");
-	// first object - titles
-	console.assert(out.length === allJsFiles.length + 1, "output array size", out.length, "!== number of files", allJsFiles.length);
-
 	var filename = args.report;
+	check.verifyString(filename, "output filename " + filename + " should be a string");
 	log.debug("output report filename", filename);
-	fs.writeFileSync(filename, JSON.stringify(out, null, 2), "utf-8");
+	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
 	log.info("Saved metrics to", filename);
 
 	filename = path.resolve(path.dirname(process.argv[1]), "test\\example_report.html");
 	log.debug("template report path", filename);
-	out = fs.readFileSync(filename, "utf-8");
+	var out = fs.readFileSync(filename, "utf-8");
 
 	filename = args.report.replace(json, ".html");
 	log.debug("output html report filename", filename);
 	fs.writeFileSync(filename, out, "utf-8");
 	log.info("Saved report html to", filename);
+}());
+
+// output complexity to command line
+(function() {
+	console.assert(metrics.length >= 1, "invalid complexity length", metrics.length);
+	if (metrics.length === 1) {
+		log.warn('nothing to report, empty complexity array');
+		return;
+	}
+
+	var Table = require('cli-table');
+	var table = new Table({
+		head: metrics[0]
+	});
+	
+	metrics.slice(1).forEach(function(item) {
+		table.push(item);
+	})
+	console.log(table.toString());
 }());
