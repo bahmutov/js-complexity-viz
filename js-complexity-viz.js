@@ -157,19 +157,29 @@ function computeMetrics(filenames) {
 
 	if (metrics.length > 0) {
 		var sortingColumn = args.sort;
-
+		var reverseSort = false;
 		var comparison = function(a, b) {
-			return a[sortingColumn] < b[sortingColumn];
+			var first = a[sortingColumn];
+			var second = b[sortingColumn];
+			if (first < second) {
+				return -1;
+			} else if (first > second) {
+				return 1;
+			} else {
+				return 0;
+			}
 		};
 		if (/^!/.test(sortingColumn)) {
 			sortingColumn = Number(sortingColumn.substr(1));
-			comparison = function(a, b) {
-				return a[sortingColumn] > b[sortingColumn];
-			}
+			reverseSort = true;
 		}
 		check.verifyNumber(sortingColumn, 'invalid sorting column ' + sortingColumn);
 		console.assert(sortingColumn >= 0 && sortingColumn < header[0].length, 'invalid sorting column', sortingColumn);
+		console.log('sorting metrics by column', sortingColumn);
 		metrics.sort(comparison);
+		if (reverseSort) {
+			metrics.reverse();
+		}
 	}
 
 	return header.concat(metrics);
