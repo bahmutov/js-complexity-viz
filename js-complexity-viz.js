@@ -139,18 +139,23 @@ function computeMetrics(filenames) {
 	});
 
 	var prettyjson = require('prettyjson');
-	var out = [];
-	out.push(["File", "LOC", "Cyclomatic", "Maintainability"]);
-
+	
+	var metrics = [];
 	complexityMetrics.forEach(function(metric) {
-		out.push([
+		metrics.push([
 			metric.name,
 			metric.complexity.aggregate.complexity.sloc.logical,
 			metric.complexity.aggregate.complexity.cyclomatic,
 			Math.round(metric.complexity.maintainability)
 			]);
 	});
-	return out;
+
+	metrics.sort(function(a, b) {
+		return a[2] < b[2];
+	});
+
+	var header = [["File", "LOC", "Cyclomatic", "Maintainability"]];
+	return header.concat(metrics);
 }
 
 var metrics = computeMetrics(allJsFiles);
@@ -188,7 +193,7 @@ console.assert(metrics.length === allJsFiles.length + 1, "output array size", me
 	var table = new Table({
 		head: metrics[0]
 	});
-	
+
 	metrics.slice(1).forEach(function(item) {
 		table.push(item);
 	})
