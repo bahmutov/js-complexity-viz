@@ -112,7 +112,11 @@ function collectJsFiles(folders) {
 				try {
 					var stats = fs.lstatSync(filename);
 					if (stats.isDirectory()) {
-						collectJsFiles([filename]);
+						if (!isJsExcluded(filename)) {
+							collectJsFiles([filename]);
+						} else {
+							log.info("skipping folder", filename);
+						}
 					}
 				}
 				catch (e) {}
