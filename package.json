@@ -1,6 +1,6 @@
 {
   "name": "js-complexity-viz",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Javascript complexity visualization",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -17,7 +17,8 @@
     "optimist": "*",
     "custom-logger": "*",
     "complexity-report": "*",
-    "prettyjson": "*"
+    "prettyjson": "*",
+    "check-types": "*"
   },
   "devDependencies": {
       "qunit": "*"
