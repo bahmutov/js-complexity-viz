@@ -12,13 +12,15 @@ var check = require('check-types');
 				path: ["."],
 				log: 1,
 				report: "report.json",
-				skip: []
+				skip: [],
+				sort: 1
 			}).alias('h', 'help').alias('p', 'path').alias('r', 'report').alias('s', 'skip')
 			.string("path").string("report").string("skip")
 			.describe("path", "input folder with JS files, use multiple if necessary")
 			.describe("log", "logging level: 0 - debug, 1 - info")
 			.describe("report", "name of the output report file")
 			.describe("skip", "filename or folder to skip, use multiple time if necessary")
+			.describe('sort', 'table column to sort on for command window output, reverse sorting using --sort !column')
 			.argv;
 
 	if (args.h || args.help || args["?"]) {
@@ -137,7 +139,7 @@ function computeMetrics(filenames) {
 		});
 	});
 
-	var prettyjson = require('prettyjson');
+	var header = [["File", "LOC", "Cyclomatic", "Maintainability"]];
 	
 	var metrics = [];
 	complexityMetrics.forEach(function(metric) {
@@ -149,11 +151,23 @@ function computeMetrics(filenames) {
 			]);
 	});
 
-	metrics.sort(function(a, b) {
-		return a[2] < b[2];
-	});
+	if (metrics.length > 0) {
+		var sortingColumn = args.sort;
 
-	var header = [["File", "LOC", "Cyclomatic", "Maintainability"]];
+		var comparison = function(a, b) {
+			return a[sortingColumn] < b[sortingColumn];
+		};
+		if (/^!/.test(sortingColumn)) {
+			sortingColumn = Number(sortingColumn.substr(1));
+			comparison = function(a, b) {
+				return a[sortingColumn] > b[sortingColumn];
+			}
+		}
+		check.verifyNumber(sortingColumn, 'invalid sorting column ' + sortingColumn);
+		console.assert(sortingColumn >= 0 && sortingColumn < header[0].length, 'invalid sorting column', sortingColumn);
+		metrics.sort(comparison);
+	}
+
 	return header.concat(metrics);
 }
 
