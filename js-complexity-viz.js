@@ -90,18 +90,17 @@ var js = /\.js$/i;
 var allJsFiles = []; 
 function collectJsFiles(folders) {
 	check.verifyArray(folders, "folders " + folders + " is not an array");
+	log.debug('checking folders', folders);
 
 	folders.forEach(function(folder) {
 		check.verifyString(folder, folder + " should be a string folder name");
-		log.debug('looking for js files in folder', folder);
 
 		var files = fs.readdirSync(folder);
 		files.forEach(function(filename) {
-			if (filename.match(js)) {
-				filename = path.resolve(folder, filename);
-				filename = filename.toLowerCase();
-				log.debug('checking js file', filename);
+			filename = path.resolve(folder, filename);
+			filename = filename.toLowerCase();
 
+			if (filename.match(js)) {
 				if (!isJsExcluded(filename)) {
 					allJsFiles.push(filename);
 				} else {
@@ -111,7 +110,7 @@ function collectJsFiles(folders) {
 				try {
 					var stats = fs.lstatSync(filename);
 					if (stats.isDirectory()) {
-						collectJsFiles(filename);
+						collectJsFiles([filename]);
 					}
 				}
 				catch (e) {}
