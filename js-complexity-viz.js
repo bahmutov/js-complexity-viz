@@ -206,40 +206,57 @@ console.assert(metrics.length === allJsFiles.length + 1, "output array size", me
 	}
 
 	var Table = require('cli-table');
-	var table;
-	if (args.colors) {
-		table = new Table({
-			head: metrics[0]
-		});
-	} else {
-		table = new Table({
-			head: metrics[0],
-			style: {
-				compact: true, 
-				'padding-left': 1, 
-				'padding-right': 1
-			},
-			chars: {
-          'top': '-'
-        , 'top-mid': '+'
-        , 'top-left': '+'
-        , 'top-right': '+'
-        , 'bottom': '-'
-        , 'bottom-mid': '+'
-        , 'bottom-left': '+' 
-        , 'bottom-right': '+'
-        , 'left': '|'
-        , 'left-mid': '+'
-        , 'mid': '-'
-        , 'mid-mid': '+'
-        , 'right': '|'
-        , 'right-mid': '+'
-      }
-		});
+	function makeTable(colorful) {
+		var table;
+		if (colorful) {
+			table = new Table({
+				head: metrics[0]
+			});
+		} else {
+			table = new Table({
+				head: metrics[0],
+				style: {
+					compact: true, 
+					'padding-left': 1, 
+					'padding-right': 1
+				},
+				chars: {
+	          'top': '-'
+	        , 'top-mid': '+'
+	        , 'top-left': '+'
+	        , 'top-right': '+'
+	        , 'bottom': '-'
+	        , 'bottom-mid': '+'
+	        , 'bottom-left': '+' 
+	        , 'bottom-right': '+'
+	        , 'left': '|'
+	        , 'left-mid': '+'
+	        , 'mid': '-'
+	        , 'mid-mid': '+'
+	        , 'right': '|'
+	        , 'right-mid': '+'
+	      }
+			});
+		}
+
+		metrics.slice(1).forEach(function(item) {
+			table.push(item);
+		})
+
+		return table;
 	}
 
-	metrics.slice(1).forEach(function(item) {
-		table.push(item);
-	})
-	console.log(table.toString());
+	(function () {
+		var table = makeTable(false);
+		console.assert(table, 'could not make plain table');
+		var filename = args.report.replace(json, ".txt");
+		fs.writeFileSync(filename, table.toString(), "utf-8");
+		log.info("Saved report text", filename);
+	}());
+
+	(function () {
+		var table = makeTable(args.colors);
+		console.assert(table, 'could not make table, colors?', args.colors);
+		console.log(table.toString());
+	}());
 }());
