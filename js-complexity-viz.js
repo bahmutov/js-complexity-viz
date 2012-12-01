@@ -5,7 +5,7 @@ var check = require('check-types');
 require('./arguments');
 console.assert(global.args, 'could not find args structure');
 
-var logger = require('./logger');
+var logger = require('optional-color-logger');
 logger.init(args);
 
 console.assert(args.path, "empty path");

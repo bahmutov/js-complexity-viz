@@ -13,8 +13,13 @@
 				recursive: true,
 				limit: 10
 			}).alias('h', 'help').alias('p', 'path').alias('r', 'report').alias('s', 'skip')
+			.alias('colors', 'color')
+			.alias('colors', 'colorful')
 			.string("path").string("report").string("skip")
-			.boolean("colors").boolean('recursive').boolean('h')
+			.boolean("colors")
+			.boolean("color")
+			.boolean("colorful")
+			.boolean('recursive').boolean('h')
 			.describe('help', 'show usage help and exit')
 			.describe("path", "input folder with JS files, use multiple if necessary")
 			.describe("log", "logging level: 0 - debug, 1 - info")
