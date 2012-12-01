@@ -1,6 +1,6 @@
 {
   "name": "js-complexity-viz",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Javascript complexity visualization",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {

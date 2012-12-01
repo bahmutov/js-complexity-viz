@@ -206,9 +206,37 @@ console.assert(metrics.length === allJsFiles.length + 1, "output array size", me
 	}
 
 	var Table = require('cli-table');
-	var table = new Table({
-		head: metrics[0]
-	});
+	var table;
+	if (args.colors) {
+		table = new Table({
+			head: metrics[0]
+		});
+	} else {
+		table = new Table({
+			head: metrics[0],
+			style: {
+				compact: true, 
+				'padding-left': 1, 
+				'padding-right': 1
+			},
+			chars: {
+          'top': '-'
+        , 'top-mid': '+'
+        , 'top-left': '+'
+        , 'top-right': '+'
+        , 'bottom': '-'
+        , 'bottom-mid': '+'
+        , 'bottom-left': '+' 
+        , 'bottom-right': '+'
+        , 'left': '|'
+        , 'left-mid': '+'
+        , 'mid': '-'
+        , 'mid-mid': '+'
+        , 'right': '|'
+        , 'right-mid': '+'
+      }
+		});
+	}
 
 	metrics.slice(1).forEach(function(item) {
 		table.push(item);
