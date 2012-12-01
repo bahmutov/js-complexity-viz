@@ -13,14 +13,16 @@ var check = require('check-types');
 				log: 1,
 				report: "report.json",
 				skip: [],
-				sort: 1
+				sort: 1,
+				colors: true
 			}).alias('h', 'help').alias('p', 'path').alias('r', 'report').alias('s', 'skip')
-			.string("path").string("report").string("skip")
+			.string("path").string("report").string("skip").boolean("colors")
 			.describe("path", "input folder with JS files, use multiple if necessary")
 			.describe("log", "logging level: 0 - debug, 1 - info")
 			.describe("report", "name of the output report file")
 			.describe("skip", "filename or folder to skip, use multiple time if necessary")
 			.describe('sort', 'table column to sort on for command window output, reverse sorting using --sort !column')
+			.describe('colors', 'use terminal colors for output, might not work with continuous build servers')
 			.argv;
 
 	if (args.h || args.help || args["?"]) {
@@ -30,22 +32,8 @@ var check = require('check-types');
 }());
 
 // initialize logger
-(function(){
-	var log = require("custom-logger");
-	var logMode = (typeof args.l === "number" ? args.l : 1);
-	console.log("log mode", logMode);
-	log["new"]({
-		debug: { level: 0, event: "debug", color: "yellow" },
-		log: { level: 1, event: "log" },
-		info: { level: 1, event: "info" },
-		warn: { level: 2, event: "warn", color: "orange" },
-		error: { level: 3, event: "error", color: "red" }
-	});
-	log.config({
-		level: logMode
-	});
-	global.log = log;
-}());
+var logger = require('./logger');
+logger.init(args);
 
 console.assert(args.path, "empty path");
 if (!Array.isArray(args.path)) {
@@ -174,8 +162,9 @@ function computeMetrics(filenames) {
 			reverseSort = true;
 		}
 		check.verifyNumber(sortingColumn, 'invalid sorting column ' + sortingColumn);
-		console.assert(sortingColumn >= 0 && sortingColumn < header[0].length, 'invalid sorting column', sortingColumn);
-		console.log('sorting metrics by column', sortingColumn);
+		var maxColumn = header[0].length;
+		console.assert(sortingColumn >= 0 && sortingColumn < maxColumn, 'invalid sorting column', sortingColumn);
+		log.debug('sorting metrics by column', sortingColumn);
 		metrics.sort(comparison);
 		if (reverseSort) {
 			metrics.reverse();
