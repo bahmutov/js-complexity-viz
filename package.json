@@ -12,6 +12,7 @@
     "js", "javascript"
   ],
   "dependencies": {
+    "optional-color-logger": "latest",
     "cli-color": "*",
     "sprintf": "*",
     "optimist": "*",

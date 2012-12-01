@@ -2,10 +2,9 @@
 function init(options) {
 	options = options || {};
 
-	var logMode = (typeof args.l === "number" ? args.l : 1);
-	if (args.colors) {
+	var logMode = (typeof options.l === "number" ? options.l : 1);
+	if (options.colors || options.colorful || options.color) {
 		var log = require("custom-logger");
-		console.log("log mode", logMode);
 		log["new"]({
 			debug: { level: 0, event: "debug", color: "yellow" },
 			log: { level: 1, event: "log" },
