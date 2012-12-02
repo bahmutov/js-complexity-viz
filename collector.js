@@ -53,7 +53,7 @@ function collectJsFiles(folders) {
 				try {
 					var stats = fs.lstatSync(filename);
 					if (stats.isDirectory()) {
-						if (!isJsExcluded(filename)) {
+						if (!isJsExcluded(filename) && args.recursive) {
 							collectJsFiles([filename]);
 						} else {
 							log.info("skipping folder", filename);
