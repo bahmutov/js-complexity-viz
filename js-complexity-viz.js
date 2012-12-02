@@ -35,24 +35,11 @@ check.verifyArray(metrics, "complexity metrics not an array");
 // first object - titles
 console.assert(metrics.length === allJsFiles.length + 1, "output array size", metrics.length, "!== number of files", allJsFiles.length);
 
-// output complexity report
-(function(){
-	var filename = args.report;
-	check.verifyString(filename, "output filename " + filename + " should be a string");
-	log.debug("output report filename", filename);
-	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
-	log.info("Saved metrics to", filename);
+var reporter = require('./reporter');
+reporter.writeComplexityChart(metrics, args.report);
+reporter.writeReportTables(metrics, args.report, args.colors);
 
-	filename = path.resolve(path.dirname(process.argv[1]), "test\\example_report.html");
-	log.debug("template report path", filename);
-	var out = fs.readFileSync(filename, "utf-8");
-
-	filename = args.report.replace(json, ".html");
-	log.debug("output html report filename", filename);
-	fs.writeFileSync(filename, out, "utf-8");
-	log.info("Saved report html to", filename);
-}());
-
+/*
 // output complexity to command line
 (function() {
 	console.assert(metrics.length >= 1, "invalid complexity length", metrics.length);
@@ -116,3 +103,4 @@ console.assert(metrics.length === allJsFiles.length + 1, "output array size", me
 		console.log(table.toString());
 	}());
 }());
+*/

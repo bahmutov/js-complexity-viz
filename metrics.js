@@ -16,15 +16,16 @@ function computeMetrics(filenames) {
 		});
 	});
 
-	var header = [["File", "LOC", "Cyclomatic", "Maintainability"]];
+	var header = [["File", "LOC", "Cyclomatic", "Halstead difficulty"]];
 	
 	var metrics = [];
 	complexityMetrics.forEach(function(metric) {
+		// console.log(metric.complexity.aggregate.complexity);
 		metrics.push([
 			metric.name,
 			metric.complexity.aggregate.complexity.sloc.logical,
 			metric.complexity.aggregate.complexity.cyclomatic,
-			Math.round(metric.complexity.maintainability)
+			Math.round(metric.complexity.aggregate.complexity.halstead.difficulty)
 			]);
 	});
 
