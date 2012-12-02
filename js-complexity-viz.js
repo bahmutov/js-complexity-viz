@@ -37,4 +37,9 @@ console.assert(metrics.length === allJsFiles.length + 1, "output array size", me
 
 var reporter = require('./reporter');
 reporter.writeComplexityChart(metrics, args.report);
-reporter.writeReportTables(metrics, args.report, args.colors);
+reporter.writeReportTables({
+	metrics: metrics,
+	filename: args.report,
+	colors: args.colors,
+	limit: args.limit
+});

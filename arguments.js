@@ -10,7 +10,8 @@
 				skip: [],
 				sort: 1,
 				colors: true,
-				recursive: true
+				recursive: true,
+				limit: 10
 			}).alias('h', 'help').alias('p', 'path').alias('r', 'report').alias('s', 'skip')
 			.string("path").string("report").string("skip")
 			.boolean("colors").boolean('recursive').boolean('h')
@@ -22,6 +23,7 @@
 			.describe('sort', 'table column to sort on for command window output, reverse sorting using --sort !column')
 			.describe('colors', 'use terminal colors for output, might not work with continuous build servers')
 			.describe('recursive', 'recurse into subfolders when looking for js files')
+			.describe('limit', 'highlight files with cyclomatic complexity above limit')
 			.argv;
 
 	if (args.h || args.help || args["?"]) {

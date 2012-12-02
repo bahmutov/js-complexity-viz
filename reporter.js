@@ -65,28 +65,29 @@ function makeTable(titles, rows, colorful) {
 	return table;
 }
 
-function writeReportTables(metrics, filename, colors) {
-	console.assert(Array.isArray(metrics), "metrics should be an array, not", metrics);
-	console.assert(metrics.length >= 1, "invalid complexity length", metrics.length);
-	check.verifyString(filename, "output filename " + filename + " should be a string");
-	if (metrics.length === 1) {
+function writeReportTables(options) {
+	options = options || {};
+	console.assert(Array.isArray(options.metrics), "metrics should be an array, not", options.metrics);
+	console.assert(options.metrics.length >= 1, "invalid complexity length", options.metrics.length);
+	check.verifyString(options.filename, "output filename " + options.filename + " should be a string");
+	if (options.metrics.length === 1) {
 		log.warn('nothing to report, empty complexity array');
 		return;
 	}
 
-	var titles = metrics[0];
-	var rows = metrics.slice(1);
+	var titles = options.metrics[0];
+	var rows = options.metrics.slice(1);
 	(function () {
 		var table = makeTable(titles, rows, false);
 		console.assert(table, 'could not make plain table');
-		var reportFilename = filename.replace(json, ".txt");
+		var reportFilename = options.filename.replace(json, ".txt");
 		fs.writeFileSync(reportFilename, table.toString(), "utf-8");
 		log.info("Saved report text", reportFilename);
 	}());
 
 	(function () {
-		var table = makeTable(titles, rows, colors);
-		console.assert(table, 'could not make table, colors?', colors);
+		var table = makeTable(titles, rows, options.colors);
+		console.assert(table, 'could not make table, colors?', options.colors);
 		console.log(table.toString());
 	}());
 }
