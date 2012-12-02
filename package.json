@@ -18,7 +18,8 @@
     "custom-logger": "*",
     "complexity-report": "*",
     "check-types": "*",
-    "cli-table": "*"
+    "cli-table": "*",
+    "colors": "*"
   },
   "devDependencies": {
       "qunit": "*"

@@ -8,7 +8,7 @@
 				log: 1,
 				report: "report.json",
 				skip: [],
-				sort: 1,
+				sort: 2,
 				colors: true,
 				recursive: true,
 				limit: 10

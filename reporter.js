@@ -1,6 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var check = require('check-types');
+var colors = require('colors');
 
 var json = /\.json$/i;
 
@@ -22,9 +23,11 @@ function writeComplexityChart(metrics, filename) {
 }
 
 var Table = require('cli-table');
-function makeTable(titles, rows, colorful) {
+function makeTable(titles, rows, colorful, complexityLimit) {
 	console.assert(Array.isArray(titles), "column titles should be an array, not", titles);
 	console.assert(Array.isArray(rows), "rows should be an array, not", rows);
+	complexityLimit = complexityLimit || 1000;
+	console.assert(complexityLimit > 0, 'invalid complexity limit', complexityLimit);
 
 	var table;
 	if (colorful) {
@@ -58,9 +61,22 @@ function makeTable(titles, rows, colorful) {
 		});
 	}
 
-	rows.forEach(function(item) {
-		table.push(item);
-	})
+	var complexityColumn = 2;
+	if (colorful) {
+		rows.forEach(function(row, index) {
+			var complexity = row[complexityColumn];
+			if (complexity > complexityLimit) {
+				var redRow = row.map(function(cell) {
+					return String(cell).bold.red;
+				});
+				rows[index] = redRow;
+			}
+		});
+	}
+
+	rows.forEach(function(row) {
+		table.push(row);
+	});
 
 	return table;
 }
@@ -86,7 +102,8 @@ function writeReportTables(options) {
 	}());
 
 	(function () {
-		var table = makeTable(titles, rows, options.colors);
+		log.debug('making table, colors?', options.colors, 'complexity limit', options.limit);
+		var table = makeTable(titles, rows, options.colors, options.limit);
 		console.assert(table, 'could not make table, colors?', options.colors);
 		console.log(table.toString());
 	}());
