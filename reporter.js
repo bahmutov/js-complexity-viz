@@ -91,13 +91,24 @@ function writeReportTables(options) {
 		return;
 	}
 
+	function getComplexityInfo() {
+		var info = 'LOC - lines of code (logical)\n' +
+			'Cyclomatic - McCabe complexity http://en.wikipedia.org/wiki/Cyclomatic_complexity\n' +
+			'Halstead difficulty - http://en.wikipedia.org/wiki/Halstead_complexity_measures\n';
+		return info;
+	}
+
+	var info = getComplexityInfo();
+	check.verifyString(info, 'complexity info should be a string, not ' + info);
+
 	var titles = options.metrics[0];
 	var rows = options.metrics.slice(1);
 	(function () {
 		var table = makeTable(titles, rows, false);
 		console.assert(table, 'could not make plain table');
 		var reportFilename = options.filename.replace(json, ".txt");
-		fs.writeFileSync(reportFilename, table.toString(), "utf-8");
+		var text = table.toString() + '\n' + info;
+		fs.writeFileSync(reportFilename, text, "utf-8");
 		log.info("Saved report text", reportFilename);
 	}());
 
@@ -105,7 +116,8 @@ function writeReportTables(options) {
 		log.debug('making table, colors?', options.colors, 'complexity limit', options.limit);
 		var table = makeTable(titles, rows, options.colors, options.limit);
 		console.assert(table, 'could not make table, colors?', options.colors);
-		console.log(table.toString());
+		var text = table.toString() + '\n' + info;
+		console.log(text);
 	}());
 }
 
