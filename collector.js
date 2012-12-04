@@ -47,7 +47,7 @@ function collectJsFiles(folders) {
 				if (!isJsExcluded(filename)) {
 					allJsFiles.push(filename);
 				} else {
-					log.info("skipping file", filename);
+					log.debug("skipping file", filename);
 				}
 			} else {
 				try {
@@ -56,7 +56,7 @@ function collectJsFiles(folders) {
 						if (!isJsExcluded(filename) && args.recursive) {
 							collectJsFiles([filename]);
 						} else {
-							log.info("skipping folder", filename);
+							log.debug("skipping folder", filename);
 						}
 					}
 				}

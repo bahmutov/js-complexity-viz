@@ -14,7 +14,7 @@ if (!Array.isArray(args.path)) {
 	paths.push(args.path);
 	args.path = paths;
 }
-log.info("looking for js files in folders", args.path);
+log.debug("looking for js files in folders", args.path);
 
 var json = /\.json$/i;
 if (!args.report.match(json)) {
@@ -25,10 +25,12 @@ if (!args.report.match(json)) {
 var allJsFiles = require('./collector').collect(args.path);
 console.assert(Array.isArray(allJsFiles), "collector has not returned array");
 
-log.info("found", allJsFiles.length, "js files");
-allJsFiles.forEach(function(filename) {
-	console.log(filename);
-});
+log.debug("found", allJsFiles.length, "js files");
+if (log.level < 1) {
+	allJsFiles.forEach(function(filename) {
+		console.log(filename);
+	});
+}
 
 var metrics = require('./metrics').computeMetrics(allJsFiles);
 check.verifyArray(metrics, "complexity metrics not an array");
