@@ -25,7 +25,7 @@ For example, the html can be ingested into Jenkins build system when using *HTML
 License
 =======
 
-The MIT License, see [*MIT-License.txt*](gt/blob/master/MIT-License.txt "MIT-License.txt")
+The MIT License, see [*MIT-License.txt*](js-complexity-viz/blob/master/MIT-License.txt "MIT-License.txt")
 
 Contact
 =======
