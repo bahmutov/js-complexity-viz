@@ -63,7 +63,7 @@ function checkFolder(folder) {
 
 	var stats = fs.lstatSync(folder);
 	if (!stats.isDirectory()) {
-		console.log(folder, 'is a filename');
+		// console.log(folder, 'is a filename');
 		checkFile(folder);
 		return;
 	}
