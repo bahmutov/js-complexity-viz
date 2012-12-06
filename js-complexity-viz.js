@@ -23,19 +23,22 @@ if (!args.report.match(json)) {
 }
 
 var allJsFiles = require('./collector').collect(args.path);
-console.assert(Array.isArray(allJsFiles), "collector has not returned array");
+console.assert(typeof allJsFiles === 'object', "collector has not returned an object");
 
-log.debug("found", allJsFiles.length, "js files");
+log.debug("found", Object.keys(allJsFiles).length, "js files");
 if (log.level < 1) {
-	allJsFiles.forEach(function(filename) {
+	Object.keys(allJsFiles).forEach(function(filename) {
 		console.log(filename);
 	});
 }
 
-var metrics = require('./metrics').computeMetrics(allJsFiles);
+var files = Object.keys(allJsFiles);
+var metrics = require('./metrics').computeMetrics(files);
 check.verifyArray(metrics, "complexity metrics not an array");
+
 // first object - titles
-console.assert(metrics.length === allJsFiles.length + 1, "output array size", metrics.length, "!== number of files", allJsFiles.length);
+var filesN = files.length;
+console.assert(metrics.length === filesN + 1, "output array size", metrics.length, "!== number of files", filesN);
 
 var reporter = require('./reporter');
 reporter.writeComplexityChart(metrics, args.report);

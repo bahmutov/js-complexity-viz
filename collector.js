@@ -30,39 +30,58 @@ function isJsExcluded(filename) {
 }
 
 var js = /\.js$/i;
-var allJsFiles = []; 
+var allJsFiles = {}; 
+
+function checkFile(filename) {
+	filename = filename.toLowerCase();
+
+	if (filename.match(js)) {
+		if (!isJsExcluded(filename)) {
+			var fullPath = path.resolve(filename);
+			allJsFiles[fullPath] = fullPath;
+			// console.log('full path', fullPath);
+		} else {
+			log.debug("skipping file", filename);
+		}
+	} else {
+		try {
+			var stats = fs.lstatSync(filename);
+			if (stats.isDirectory()) {
+				if (!isJsExcluded(filename) && args.recursive) {
+					collectJsFiles([filename]);
+				} else {
+					log.debug("skipping folder", filename);
+				}
+			}
+		}
+		catch (e) {}
+	}
+}
+
+function checkFolder(folder) {
+	check.verifyString(folder, folder + " should be a string folder name");
+
+	var stats = fs.lstatSync(folder);
+	if (!stats.isDirectory()) {
+		console.log(folder, 'is a filename');
+		checkFile(folder);
+		return;
+	}
+
+	var files = fs.readdirSync(folder);
+	files.forEach(function(filename) {
+		filename = path.resolve(folder, filename);
+		checkFile(filename);
+	});
+}
+
 function collectJsFiles(folders) {
 	check.verifyArray(folders, "folders " + folders + " is not an array");
 	log.debug('checking folders', folders);
 
 	folders.forEach(function(folder) {
-		check.verifyString(folder, folder + " should be a string folder name");
-
-		var files = fs.readdirSync(folder);
-		files.forEach(function(filename) {
-			filename = path.resolve(folder, filename);
-			filename = filename.toLowerCase();
-
-			if (filename.match(js)) {
-				if (!isJsExcluded(filename)) {
-					allJsFiles.push(filename);
-				} else {
-					log.debug("skipping file", filename);
-				}
-			} else {
-				try {
-					var stats = fs.lstatSync(filename);
-					if (stats.isDirectory()) {
-						if (!isJsExcluded(filename) && args.recursive) {
-							collectJsFiles([filename]);
-						} else {
-							log.debug("skipping folder", filename);
-						}
-					}
-				}
-				catch (e) {}
-			}
-		});
+		var fullFolder = path.resolve(folder);
+		checkFolder(fullFolder);
 	});
 }
 

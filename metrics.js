@@ -11,7 +11,8 @@ function computeMetrics(filenames) {
 		var report = cr.run(source);
 		// console.log(filename, '\n', report);
 		complexityMetrics.push({
-			name: path.relative(args.path, filename),
+			// name: path.relative(args.path, filename),
+			name: filename,
 			complexity: report
 		});
 	});
