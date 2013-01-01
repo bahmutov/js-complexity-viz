@@ -10,9 +10,7 @@ logger.init(args);
 
 console.assert(args.path, "empty path");
 if (!Array.isArray(args.path)) {
-	var paths = [];
-	paths.push(args.path);
-	args.path = paths;
+	args.path = [args.path];
 }
 log.debug("looking for js files in folders", args.path);
 
