@@ -1,3 +1,10 @@
+var complexity = require('./src/js-complexity');
+if (module.parent) {
+	console.log('js complexity viz as module');
+	module.exports = complexity;
+	return;
+}
+
 var fs = require("fs");
 var path = require("path");
 var check = require('check-types');
@@ -14,7 +21,6 @@ if (!Array.isArray(args.path)) {
 }
 log.debug("looking for js files in folders", args.path);
 
-var complexity = require('./src/js-complexity');
 complexity.run({
 	report: args.report,
 	path: args.path,
