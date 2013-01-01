@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 var check = require('check-types');
 
-require('./arguments');
+require('./src/arguments');
 console.assert(global.args, 'could not find args structure');
 
 var logger = require('optional-color-logger');
@@ -14,7 +14,7 @@ if (!Array.isArray(args.path)) {
 }
 log.debug("looking for js files in folders", args.path);
 
-var complexity = require('./js-complexity');
+var complexity = require('./src/js-complexity');
 complexity.run({
 	report: args.report,
 	path: args.path,

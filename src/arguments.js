@@ -18,7 +18,7 @@
 			.string("path").string("report").string("skip")
 			.boolean('recursive').boolean('h')
 			.describe('help', 'show usage help and exit')
-			.describe("path", "input folder with JS files, use multiple if necessary")
+			.describe("path", "input filename|folder with JS files, use multiple if necessary")
 			.describe("log", "logging level: 0 - debug, 1 - info")
 			.describe("report", "name of the output report file")
 			.describe("skip", "filename or folder to skip, use multiple time if necessary")
