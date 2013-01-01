@@ -7,6 +7,8 @@ var json = /\.json$/i;
 
 // output complexity report chart to file
 function writeComplexityChart(metrics, filename) {
+	// console.log(metrics);
+
 	check.verifyString(filename, "output filename " + filename + " should be a string");
 	log.debug("output report filename", filename);
 	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
@@ -90,6 +92,8 @@ function writeReportTables(options) {
 		log.warn('nothing to report, empty complexity array');
 		return;
 	}
+
+	// console.log(options.metrics);
 
 	function getComplexityInfo() {
 		var info = 'LOC - lines of code (logical)\n' +

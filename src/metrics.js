@@ -11,8 +11,28 @@ function computeMetrics(filenames, options) {
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
 		var source = fs.readFileSync(filename, "utf-8");
-		var report = cr.run(source);
-		// console.log(filename, '\n', report);
+
+		var report;
+		try {
+			report = cr.run(source);
+			// console.log(filename, '\n', report);
+		}
+		catch (ex) {
+			console.log('could not compute complexity for', filename);
+			report = {
+				aggregate: {
+					complexity: {
+						sloc: {
+							logical: 0
+						},
+						cyclomatic: 0,
+						halstead: {
+							difficulty: 0
+						}
+					}
+				}
+			};
+		}
 		complexityMetrics.push({
 			// name: path.relative(args.path, filename),
 			name: filename,
