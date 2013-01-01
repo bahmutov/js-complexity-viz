@@ -1,6 +1,5 @@
 var complexity = require('./src/js-complexity');
 if (module.parent) {
-	console.log('js complexity viz as module');
 	module.exports = complexity;
 	return;
 }
@@ -25,5 +24,6 @@ complexity.run({
 	report: args.report,
 	path: args.path,
 	colors: args.colors,
-	limit: args.limit
+	limit: args.limit,
+	sort: args.sort
 });

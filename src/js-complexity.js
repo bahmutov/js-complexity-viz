@@ -2,9 +2,10 @@ var check = require('check-types');
 
 function run(config) {
 	config = config || {};
+	config.limit = config.limit || 10;
 
 	var json = /\.json$/i;
-	if (!config.report.match(json)) {
+	if (config.report && !config.report.match(json)) {
 		log.error("output report filename", config.report, "is not json");
 		process.exit(1);
 	}
@@ -22,7 +23,7 @@ function run(config) {
 	}
 
 	var files = Object.keys(allJsFiles);
-	var metrics = require('./metrics').computeMetrics(files);
+	var metrics = require('./metrics').computeMetrics(files, config);
 	check.verifyArray(metrics, "complexity metrics not an array");
 
 	// first object - titles
@@ -30,10 +31,12 @@ function run(config) {
 	console.assert(metrics.length === filesN + 1, "output array size", metrics.length, "!== number of files", filesN);
 
 	var reporter = require('./reporter');
-	reporter.writeComplexityChart(metrics, args.report);
+	if (config.report) {
+		reporter.writeComplexityChart(metrics, config.report);
+	}
 	reporter.writeReportTables({
 		metrics: metrics,
-		filename: args.report,
+		filename: config.report,
 		colors: config.colors,
 		limit: config.limit
 	});

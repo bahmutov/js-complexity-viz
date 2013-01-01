@@ -4,7 +4,10 @@ var cr = require('complexity-report');
 var check = require('check-types');
 
 // returns an array of metrics by file
-function computeMetrics(filenames) {
+function computeMetrics(filenames, options) {
+	options = options || {};
+	options.sort = options.sort || 1;
+
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
 		var source = fs.readFileSync(filename, "utf-8");
@@ -31,7 +34,7 @@ function computeMetrics(filenames) {
 	});
 
 	if (metrics.length > 0) {
-		var sortingColumn = args.sort;
+		var sortingColumn = options.sort;
 		var reverseSort = false;
 		var comparison = function(a, b) {
 			var first = a[sortingColumn];
