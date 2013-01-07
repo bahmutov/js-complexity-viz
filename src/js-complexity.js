@@ -38,7 +38,8 @@ function run(config) {
 		metrics: metrics,
 		filename: config.report,
 		colors: config.colors,
-		limit: config.limit
+		limit: config.limit,
+		minimal: config.minimal
 	});
 }
 

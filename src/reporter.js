@@ -104,6 +104,9 @@ function writeReportTables(options) {
 
 	var info = getComplexityInfo();
 	check.verifyString(info, 'complexity info should be a string, not ' + info);
+	if (options.minimal) {
+		info = '';
+	}
 
 	var titles = options.metrics[0];
 	var rows = options.metrics.slice(1);

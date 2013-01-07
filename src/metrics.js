@@ -18,7 +18,7 @@ function computeMetrics(filenames, options) {
 			// console.log(filename, '\n', report);
 		}
 		catch (ex) {
-			console.log('could not compute complexity for', filename);
+			console.log('could not compute complexity for', filename, '\n', ex);
 			report = {
 				aggregate: {
 					complexity: {
