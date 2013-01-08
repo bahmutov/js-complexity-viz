@@ -30,7 +30,7 @@ function isJsExcluded(filename) {
 }
 
 var js = /\.js$/i;
-var allJsFiles = {}; 
+var allJsFiles = {};
 
 function checkFile(filename) {
 	filename = filename.toLowerCase();
@@ -87,6 +87,7 @@ function collectJsFiles(folders) {
 
 module.exports = {
 	collect: function(folders) {
+		allJsFiles = {};
 		collectJsFiles(folders);
 		return allJsFiles;
 	}

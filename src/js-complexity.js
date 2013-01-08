@@ -1,4 +1,5 @@
 var check = require('check-types');
+var collector = require('./collector');
 
 function run(config) {
 	config = config || {};
@@ -12,9 +13,9 @@ function run(config) {
 
 	console.assert(Array.isArray(config.path), 'path should be a list of paths');
 
-	var allJsFiles = require('./collector').collect(config.path);
+	var allJsFiles = collector.collect(config.path);
 	console.assert(typeof allJsFiles === 'object', "collector has not returned an object");
-
+	
 	log.debug("found", Object.keys(allJsFiles).length, "js files");
 	if (log.level < 1) {
 		Object.keys(allJsFiles).forEach(function(filename) {
