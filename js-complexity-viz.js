@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var complexity = require('./src/js-complexity');
 if (module.parent) {
 	module.exports = complexity;
@@ -6,24 +8,24 @@ if (module.parent) {
 	var path = require("path");
 	var check = require('check-types');
 
-	require('./src/arguments');
-	console.assert(global.args, 'could not find args structure');
+	var arguments = require('./src/arguments').run();
+	console.assert(arguments, 'could not find args structure');
 
 	var logger = require('optional-color-logger');
-	logger.init(args);
+	logger.init(arguments);
 
-	console.assert(args.path, "empty path");
-	if (!Array.isArray(args.path)) {
-		args.path = [args.path];
+	console.assert(arguments.path, "empty path");
+	if (!Array.isArray(arguments.path)) {
+		arguments.path = [arguments.path];
 	}
-	log.debug("looking for js files in folders", args.path);
+	log.debug("looking for js files in folders", arguments.path);
 
 	complexity.run({
-		report: args.report,
-		path: args.path,
-		colors: args.colors,
-		limit: args.limit,
-		sort: args.sort,
-		minimal: args.minimal
+		report: arguments.report,
+		path: arguments.path,
+		colors: arguments.colors,
+		limit: arguments.limit,
+		sort: arguments.sort,
+		minimal: arguments.minimal
 	});
 }

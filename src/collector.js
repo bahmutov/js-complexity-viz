@@ -2,28 +2,31 @@ var path = require("path");
 var fs = require("fs");
 var check = require('check-types');
 
-(function prepareExcludedFilenames() {
-	if (!Array.isArray(args.skip)) {
-		args.skip = [args.skip];
+function prepareExcludedFilenames(config) {
+	config = config || {};
+	if (!Array.isArray(config.skip)) {
+		config.skip = [config.skip];
 	}
-	log.debug("preparing excluded paths", args.skip);
-	args.skip.forEach(function(name, index) {
-		var fullname = path.resolve(args.path, name);
+	console.assert(Array.isArray(config.skip), 'expected skip to be an array');
+	log.debug("preparing excluded paths", config.skip);
+	config.skip.forEach(function(name, index) {
+		var fullname = path.resolve(config.path, name);
 		fullname = fullname.toLowerCase();
-		args.skip[index] = fullname;
+		config.skip[index] = fullname;
 	});
-	log.debug("excluded files", args.skip);
-}());
+	log.debug("excluded files", config.skip);
+}
 
-function isJsExcluded(filename) {
+function isJsExcluded(filename, config) {
 	check.verifyString(filename, 'filename should be a string, not ' + filename);
-	check.verifyArray(args.skip, "args.skip should be an array");
-	if (!args.skip.length) {
+	console.assert(config, 'missing config');
+	check.verifyArray(config.skip, "config.skip should be an array");
+	if (!config.skip.length) {
 		return false;
 	}
 
 	// assuming both files are lowercase
-	var found = args.skip.some(function(name) {
+	var found = config.skip.some(function(name) {
 		return filename === name;
 	});
 	return found;
@@ -32,11 +35,11 @@ function isJsExcluded(filename) {
 var js = /\.js$/i;
 var allJsFiles = {};
 
-function checkFile(filename) {
+function checkFile(filename, config) {
 	filename = filename.toLowerCase();
 
 	if (filename.match(js)) {
-		if (!isJsExcluded(filename)) {
+		if (!isJsExcluded(filename, config)) {
 			var fullPath = path.resolve(filename);
 			allJsFiles[fullPath] = fullPath;
 			// console.log('full path', fullPath);
@@ -47,8 +50,8 @@ function checkFile(filename) {
 		try {
 			var stats = fs.lstatSync(filename);
 			if (stats.isDirectory()) {
-				if (!isJsExcluded(filename) && args.recursive) {
-					collectJsFiles([filename]);
+				if (!isJsExcluded(filename) && config.recursive) {
+					collectJsFiles([filename], config);
 				} else {
 					log.debug("skipping folder", filename);
 				}
@@ -58,37 +61,42 @@ function checkFile(filename) {
 	}
 }
 
-function checkFolder(folder) {
+function checkFolder(folder, config) {
 	check.verifyString(folder, folder + " should be a string folder name");
+	console.assert(config, 'missing config');
 
 	var stats = fs.lstatSync(folder);
 	if (!stats.isDirectory()) {
 		// console.log(folder, 'is a filename');
-		checkFile(folder);
+		checkFile(folder, config);
 		return;
 	}
 
 	var files = fs.readdirSync(folder);
 	files.forEach(function(filename) {
 		filename = path.resolve(folder, filename);
-		checkFile(filename);
+		checkFile(filename, config);
 	});
 }
 
-function collectJsFiles(folders) {
-	check.verifyArray(folders, "folders " + folders + " is not an array");
-	log.debug('checking folders', folders);
+function collectJsFiles(config) {
+	console.assert(config, 'missing config');
+	check.verifyArray(config.path, "expected list of files");
+	log.debug('checking folders', config.path);
 
-	folders.forEach(function(folder) {
+	config.path.forEach(function(folder) {
 		var fullFolder = path.resolve(folder);
-		checkFolder(fullFolder);
+		checkFolder(fullFolder, config);
 	});
 }
 
 module.exports = {
-	collect: function(folders) {
+	collect: function(config) {
+		console.assert(config, 'missing config');
+		prepareExcludedFilenames(config);
+
 		allJsFiles = {};
-		collectJsFiles(folders);
+		collectJsFiles(config);
 		return allJsFiles;
 	}
 };

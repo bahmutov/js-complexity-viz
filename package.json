@@ -1,6 +1,6 @@
 {
   "name": "js-complexity-viz",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Javascript complexity visualization",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -31,5 +31,8 @@
   "scripts" : { 
     "test": "qunit -c ./test/filenames.js -t ./test/filenames.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "preferGlobal": "true",
+  "main": "./js-complexity-viz.js",
+  "bin": "./js-complexity-viz.js"
 }

@@ -1,5 +1,5 @@
 // process input command line arguments
-(function(){
+module.exports.run = function () {
 	var optimist = require("optimist");
 	global.args = optimist.usage("Visualize JS files complexity.\nUsage: $0")
 		.default({
@@ -44,4 +44,5 @@
 		console.log(args);
 		process.exit(0);	
 	}
-}());
+	return args;
+};

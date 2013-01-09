@@ -34,7 +34,6 @@ function computeMetrics(filenames, options) {
 			};
 		}
 		complexityMetrics.push({
-			// name: path.relative(args.path, filename),
 			name: filename,
 			complexity: report
 		});

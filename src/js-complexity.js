@@ -13,7 +13,7 @@ function run(config) {
 
 	console.assert(Array.isArray(config.path), 'path should be a list of paths');
 
-	var allJsFiles = collector.collect(config.path);
+	var allJsFiles = collector.collect(config);
 	console.assert(typeof allJsFiles === 'object', "collector has not returned an object");
 	
 	log.debug("found", Object.keys(allJsFiles).length, "js files");
