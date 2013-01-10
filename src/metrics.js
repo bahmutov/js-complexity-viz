@@ -10,15 +10,13 @@ function computeMetrics(filenames, options) {
 
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
-		var source = fs.readFileSync(filename, "utf-8");
-
-		var report;
 		try {
-			report = cr.run(source);
+			var source = fs.readFileSync(filename, "utf-8");
+			console.assert(source, 'could not get source from file', filename);
+			var report = cr.run(source);
 			// console.log(filename, '\n', report);
-		}
-		catch (ex) {
-			console.log('could not compute complexity for', filename, '\n', ex);
+		}	catch (ex) {
+			console.error('could not compute complexity for', filename, '\n', ex);
 			report = {
 				aggregate: {
 					complexity: {

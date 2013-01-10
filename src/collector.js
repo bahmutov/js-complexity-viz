@@ -91,7 +91,7 @@ function collectJsFiles(config) {
 }
 
 function discoverSourceFiles(files) {
-	console.assert(Array.isArray(files), 'expect list of filenames');	
+	console.assert(Array.isArray(files), 'expect list of filenames, not', JSON.stringify(files));	
 	var glob = require("glob");
 
 	var filenames = [];
@@ -109,9 +109,10 @@ function discoverSourceFiles(files) {
 module.exports = {
 	collect: function(config) {
 		console.assert(config, 'missing config');
+		config.skip = config.skip || [];
 
 		var files = discoverSourceFiles(config.path);
-		console.assert(Array.isArray(files), 'could not input files');
+		console.assert(Array.isArray(files), 'could not discover input files from path', config.path);
 		config.path = files;
 
 		var skipFiles = discoverSourceFiles(config.skip);
