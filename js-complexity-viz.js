@@ -18,6 +18,9 @@ if (module.parent) {
 	if (!Array.isArray(arguments.path)) {
 		arguments.path = [arguments.path];
 	}
+	if (!Array.isArray(arguments.skip)) {
+		arguments.skip = [arguments.skip];
+	}
 	log.debug("looking for js files in folders", arguments.path);
 
 	complexity.run({
@@ -26,6 +29,7 @@ if (module.parent) {
 		colors: arguments.colors,
 		limit: arguments.limit,
 		sort: arguments.sort,
-		minimal: arguments.minimal
+		minimal: arguments.minimal,
+		skip: arguments.skip
 	});
 }

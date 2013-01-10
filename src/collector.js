@@ -90,9 +90,34 @@ function collectJsFiles(config) {
 	});
 }
 
+function discoverSourceFiles(files) {
+	console.assert(Array.isArray(files), 'expect list of filenames');	
+	var glob = require("glob");
+
+	var filenames = [];
+	files.forEach(function (shortName) {
+		var files = glob.sync(shortName);
+		filenames = filenames.concat(files);
+	});
+
+	filenames = filenames.map(function (shortName) {
+		return path.resolve(shortName);
+	});
+	return filenames;
+}
+
 module.exports = {
 	collect: function(config) {
 		console.assert(config, 'missing config');
+
+		var files = discoverSourceFiles(config.path);
+		console.assert(Array.isArray(files), 'could not input files');
+		config.path = files;
+
+		var skipFiles = discoverSourceFiles(config.skip);
+		console.assert(Array.isArray(skipFiles), 'could not find skip files');
+		config.skip = skipFiles;
+
 		prepareExcludedFilenames(config);
 
 		allJsFiles = {};
