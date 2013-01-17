@@ -8,13 +8,25 @@ function computeMetrics(filenames, options) {
 	options = options || {};
 	options.sort = options.sort || 1;
 
+	var source, report;
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
 		try {
-			var source = fs.readFileSync(filename, "utf-8");
+			source = fs.readFileSync(filename, "utf-8");
 			console.assert(source, 'could not get source from file', filename);
-			var report = cr.run(source);
-			// console.log(filename, '\n', report);
+			try {
+				report = cr.run(source);
+			} catch (error) {
+				if (/Line 1:/.test(error)) {
+					console.log('First line in', filename, 'has problem, maybe it is # character?');
+					var lines = source.split('\n');
+					lines = lines.filter(function (line) {
+						return (line[0] !== '#');
+					});
+					source = lines.join('\n');
+					report = cr.run(source);
+				}
+			}
 		}	catch (ex) {
 			console.error('could not compute complexity for', filename, '\n', ex);
 			report = {
