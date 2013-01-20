@@ -14,14 +14,18 @@ function writeComplexityChart(metrics, filename) {
 	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
 	log.info("Saved metrics to", filename);
 
+	/*
 	var htmlFilename = path.resolve(path.dirname(process.argv[1]), path.join("test", "example_report.html"));
 	log.debug("template report path", htmlFilename);
 	var out = fs.readFileSync(htmlFilename, "utf-8");
+	*/
 
+	/*
 	filename = filename.replace(json, ".html");
 	log.debug("output html report filename", filename);
 	fs.writeFileSync(filename, out, "utf-8");
 	log.info("Saved report html to", filename);
+	*/
 }
 
 var Table = require('cli-table');

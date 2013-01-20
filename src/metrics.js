@@ -18,7 +18,7 @@ function computeMetrics(filenames, options) {
 				report = cr.run(source);
 			} catch (error) {
 				if (/Line 1:/.test(error)) {
-					console.log('First line in', filename, 'has problem, maybe it is # character?');
+					// console.log('First line in', filename, 'has problem, maybe it is # character?');
 					var lines = source.split('\n');
 					lines = lines.filter(function (line) {
 						return (line[0] !== '#');
