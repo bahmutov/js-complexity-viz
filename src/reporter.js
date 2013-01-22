@@ -93,7 +93,7 @@ function writeReportTables(options) {
 	console.assert(options.metrics.length >= 1, "invalid complexity length", options.metrics.length);
 
 	if (options.metrics.length === 1) {
-		log.warn('nothing to report, empty complexity array');
+		log.log('nothing to report, empty complexity array');
 		return;
 	}
 

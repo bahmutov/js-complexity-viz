@@ -9,7 +9,7 @@ module.exports.run = function () {
 			sort: 2,
 			colors: true,
 			recursive: true,
-			limit: 10,
+			limit: 15,
 			log: 1,
 			report: "report.json",
 			minimal: false
