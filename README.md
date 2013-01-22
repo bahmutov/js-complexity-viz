@@ -3,7 +3,7 @@ js-complexity-viz
 
 [![Build status][ci-image]][ci-status]
 
-JavaScript source code visualization runner using node.js
+JavaScript source code complexity tool
 
 This is a runner/wrapper around Phil Booth's tool [*complexity report*](https://github.com/philbooth/complexityReport.js "Complexity report at github")
 
@@ -11,7 +11,7 @@ Install and run
 ===============
 
 	npm install js-complexity-viz
-	node js-complexity-viz -p <folder with js files>
+	node js-complexity-viz foo.js tests/*.js
 
 Use -h option to see all (few) options
 
