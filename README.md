@@ -10,8 +10,10 @@ This is a runner/wrapper around Phil Booth's tool [*complexity report*](https://
 Install and run
 ===============
 
-	npm install js-complexity-viz
-	node js-complexity-viz foo.js tests/*.js
+	npm install -g js-complexity-viz
+	js-complexity-viz foo.js tests/*.js
+
+It can also be installed locally and used from other modules. See *js-complexity-viz.js* source file.
 
 Use -h option to see all (few) options
 
