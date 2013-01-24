@@ -13,19 +13,6 @@ function writeComplexityChart(metrics, filename) {
 	log.debug("output report filename", filename);
 	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
 	log.info("Saved metrics to", filename);
-
-	/*
-	var htmlFilename = path.resolve(path.dirname(process.argv[1]), path.join("test", "example_report.html"));
-	log.debug("template report path", htmlFilename);
-	var out = fs.readFileSync(htmlFilename, "utf-8");
-	*/
-
-	/*
-	filename = filename.replace(json, ".html");
-	log.debug("output html report filename", filename);
-	fs.writeFileSync(filename, out, "utf-8");
-	log.info("Saved report html to", filename);
-	*/
 }
 
 var Table = require('cli-table');
@@ -87,6 +74,38 @@ function makeTable(titles, rows, colorful, complexityLimit) {
 	return table;
 }
 
+function removeMatchingPrefixes(rows) {
+	console.assert(Array.isArray(rows), 'expected array, not', JSON.stringify(rows));
+	if (!rows.length) {
+		return rows;
+	}
+	var column = 0;
+	var commonPrefix = '';
+	do {
+		console.assert(typeof rows[0][column] === 'string', 
+			'data in column cell', rows[0][column], 'should be a string');
+		if (!rows[0][column].length) {
+			break;
+		}
+		var firstLetter = rows[0][column][0];
+		var firstLetterSame = rows.every(function (row) {
+			return row[column][0] === firstLetter;
+		});
+		if (!firstLetterSame) {
+			break;
+		}
+		commonPrefix += firstLetter;
+		rows = rows.map(function (row) {
+			row[column] = row[column].substr(1);
+			return row;
+		});
+	} while (true);
+	if (commonPrefix.length) {
+		console.log(commonPrefix);
+	}
+	return rows;
+}
+
 function writeReportTables(options) {
 	options = options || {};
 	console.assert(Array.isArray(options.metrics), "metrics should be an array, not", options.metrics);
@@ -128,7 +147,8 @@ function writeReportTables(options) {
 
 	(function () {
 		log.debug('making table, colors?', options.colors, 'complexity limit', options.limit);
-		var table = makeTable(titles, rows, options.colors, options.limit);
+		var rowsNoPrefix = removeMatchingPrefixes(rows);
+		var table = makeTable(titles, rowsNoPrefix, options.colors, options.limit);
 		console.assert(table, 'could not make table, colors?', options.colors);
 		var text = table.toString() + '\n' + info;
 		console.log(text);

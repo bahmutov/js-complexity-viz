@@ -1,6 +1,6 @@
 {
   "name": "js-complexity-viz",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Javascript complexity tool",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
