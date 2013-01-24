@@ -2,13 +2,14 @@ var fs = require("fs");
 var path = require("path");
 var check = require('check-types');
 var colors = require('colors');
+var _ = require('lodash');
+var Vector = require('gauss').Vector;
 
 var json = /\.json$/i;
 
 // output complexity report chart to file
 function writeComplexityChart(metrics, filename) {
 	// console.log(metrics);
-
 	check.verifyString(filename, "output filename " + filename + " should be a string");
 	log.debug("output report filename", filename);
 	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
@@ -150,8 +151,19 @@ function writeReportTables(options) {
 		var rowsNoPrefix = removeMatchingPrefixes(rows);
 		var table = makeTable(titles, rowsNoPrefix, options.colors, options.limit);
 		console.assert(table, 'could not make table, colors?', options.colors);
-		var text = table.toString() + '\n' + info;
+		var text = table.toString();
+		if (info) {
+			text += '\n' + info;
+		}
 		console.log(text);
+
+		var complexities = _.pluck(rows, 2);
+		var set = new Vector(complexities);
+		console.log('Cyclomatic: min', set.min(), 'mean', set.mean().toFixed(1), 'max', set.max());
+
+		complexities = _.pluck(rows, 3);
+		set = new Vector(complexities);
+		console.log('Halstead: min', set.min(), 'mean', set.mean().toFixed(1), 'max', set.max());
 	}());
 }
 

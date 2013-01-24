@@ -1,6 +1,6 @@
 {
   "name": "js-complexity-viz",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Javascript complexity tool",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -21,7 +21,9 @@
     "check-types": "*",
     "cli-table": "*",
     "colors": "*",
-    "glob": "latest"
+    "glob": "latest",
+    "gauss": "latest",
+    "lodash": "latest"
   },
   "devDependencies": {
       "qunit": "*"
