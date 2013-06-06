@@ -1,6 +1,6 @@
 {
   "name": "jsc",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Javascript complexity tool",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -33,7 +33,10 @@
     "allong.es": "~0.13.0"
   },
   "devDependencies": {
-    "qunit": "~0.5.16"
+    "qunit": "~0.5.16",
+    "grunt-bump": "0.0.2",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt": "~0.4.1"
   },
   "engines": {
     "node": ">= 0.8.0"
