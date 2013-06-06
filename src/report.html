@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      JS Complexity
+    </title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+    <script type="text/javascript">
+      require(["dojo/request", "dojo/io-query"], function(request, ioQuery) {
+        var uri = window.location.search;
+        var query = uri.substring(uri.indexOf("?") + 1, uri.length);
+        var queryObject = ioQuery.queryToObject(query);
+        var reportUrl = (queryObject.report || "report.json");
+
+        var data = [];
+
+        function drawVisualization() {
+          console.log("Drawing", data.length, "data points");
+          var dataTable = google.visualization.arrayToDataTable(data);
+
+          var fileInfoHeight = 100;
+          new google.visualization.BarChart(document.getElementById('visualization')).
+          draw(dataTable,
+          {
+            title: "JavaScript code complexity",
+            width:"100%", height: (data.length - 1) * fileInfoHeight,
+            hAxis: {title: "Metric"}
+          });
+        }
+
+        function loadData() {
+          console.log("viz library loaded, loading data");
+          request(reportUrl).then(
+            function(text) {
+              console.log("loaded json data from", reportUrl);
+              
+              data = JSON.parse(text);
+              drawVisualization();
+            },
+            function(error){
+              console.error("An error occurred: " + error);
+            }
+          );
+        }
+
+        google.setOnLoadCallback(loadData);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="visualization"></div>
+    <small>Usage: open in the browser this document, pass report.json using ?report=<i>path.json</i></small>
+  </body>
+</html>

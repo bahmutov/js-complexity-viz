@@ -1,0 +1,49 @@
+{
+  "name": "jsc",
+  "version": "0.3.3",
+  "description": "Javascript complexity tool",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/js-complexity-viz.git"
+  },
+  "keywords": [
+    "code",
+    "complexity",
+    "code complexity",
+    "js",
+    "javascript"
+  ],
+  "dependencies": {
+    "ggit": "latest",
+    "optional-color-logger": "latest",
+    "cli-color": "*",
+    "sprintf": "*",
+    "optimist": "*",
+    "custom-logger": "*",
+    "complexity-report": "*",
+    "check-types": "*",
+    "cli-table": "*",
+    "colors": "*",
+    "glob": "latest",
+    "gauss": "latest",
+    "lodash": "latest",
+    "moment": "latest",
+    "commander": "latest",
+    "allong.es": "~0.13.0"
+  },
+  "devDependencies": {
+    "qunit": "*"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "qunit -c ./test/filenames.js -t ./test/filenames.js",
+    "complexity": "node js-complexity-viz *.js src/*.js"
+  },
+  "license": "MIT",
+  "preferGlobal": "true",
+  "main": "./js-complexity-viz.js",
+  "bin": "./js-complexity-viz.js"
+}

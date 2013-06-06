@@ -1,0 +1,483 @@
+{
+  "aggregate": {
+    "line": 1,
+    "complexity": {
+      "sloc": {
+        "physical": 107,
+        "logical": 72
+      },
+      "cyclomatic": 9,
+      "halstead": {
+        "operators": {
+          "distinct": 20,
+          "total": 178,
+          "identifiers": [
+            "var",
+            "=",
+            "()",
+            "function",
+            ".",
+            "{}",
+            ":",
+            "catch",
+            "if",
+            "return",
+            "!==",
+            "||",
+            "[]",
+            ">",
+            "else",
+            "<",
+            "- (postfix)",
+            "+",
+            "&&",
+            ">="
+          ]
+        },
+        "operands": {
+          "distinct": 83,
+          "total": 222,
+          "identifiers": [
+            "fs",
+            "\"fs\"",
+            "require",
+            "path",
+            "\"path\"",
+            "cr",
+            "\"complexity-report\"",
+            "check",
+            "\"check-types\"",
+            "getSourceComplexity",
+            "source",
+            "filename",
+            "\"missing source\"",
+            "verifyString",
+            "report",
+            "<anonymous>",
+            "aggregate",
+            "complexity",
+            "sloc",
+            "logical",
+            0,
+            "cyclomatic",
+            "halstead",
+            "difficulty",
+            "run",
+            "error",
+            {},
+            "test",
+            "lines",
+            "\"\n\"",
+            "split",
+            "line",
+            "\"#\"",
+            "filter",
+            "join",
+            "computeMetrics",
+            "filenames",
+            "options",
+            "sort",
+            1,
+            "complexityMetrics",
+            "\"utf-8\"",
+            "readFileSync",
+            "\"could not get source from file\"",
+            "\"could not get complexity for\"",
+            "verifyObject",
+            "name",
+            "push",
+            "forEach",
+            "header",
+            "\"File\"",
+            "\"LOC\"",
+            "\"Cyclomatic\"",
+            "\"Halstead difficulty\"",
+            "metrics",
+            "metric",
+            "toFixed",
+            "console",
+            "length",
+            "sortingColumn",
+            "reverseSort",
+            false,
+            "comparison",
+            "a",
+            "b",
+            "first",
+            "second",
+            {},
+            "substr",
+            "Number",
+            true,
+            "\"invalid sorting column \"",
+            "verifyNumber",
+            "maxColumn",
+            "\"invalid sorting column\"",
+            "assert",
+            "\"sorting metrics by column\"",
+            "log",
+            "debug",
+            "reverse",
+            "concat",
+            "module",
+            "exports"
+          ]
+        },
+        "length": 400,
+        "vocabulary": 103,
+        "difficulty": 26.746987951807228,
+        "volume": 2674.6002108732873,
+        "effort": 71537.49961612889,
+        "bugs": 0.8915334036244291,
+        "time": 3974.305534229383
+      }
+    }
+  },
+  "functions": [
+    {
+      "name": "getSourceComplexity",
+      "line": 6,
+      "complexity": {
+        "sloc": {
+          "physical": 31,
+          "logical": 18
+        },
+        "cyclomatic": 2,
+        "halstead": {
+          "operators": {
+            "distinct": 10,
+            "total": 38,
+            "identifiers": [
+              "()",
+              ".",
+              "var",
+              "=",
+              "{}",
+              ":",
+              "catch",
+              "if",
+              "function",
+              "return"
+            ]
+          },
+          "operands": {
+            "distinct": 25,
+            "total": 47,
+            "identifiers": [
+              "source",
+              "filename",
+              "\"missing source\"",
+              "check",
+              "verifyString",
+              "report",
+              "<anonymous>",
+              "aggregate",
+              "complexity",
+              "sloc",
+              "logical",
+              0,
+              "cyclomatic",
+              "halstead",
+              "difficulty",
+              "cr",
+              "run",
+              "error",
+              {},
+              "test",
+              "lines",
+              "\"\n\"",
+              "split",
+              "filter",
+              "join"
+            ]
+          },
+          "length": 85,
+          "vocabulary": 35,
+          "difficulty": 9.399999999999999,
+          "volume": 435.98905644032214,
+          "effort": 4098.297130539027,
+          "bugs": 0.14532968548010738,
+          "time": 227.68317391883485
+        }
+      }
+    },
+    {
+      "name": "<anonymous>",
+      "line": 28,
+      "complexity": {
+        "sloc": {
+          "physical": 3,
+          "logical": 1
+        },
+        "cyclomatic": 1,
+        "halstead": {
+          "operators": {
+            "distinct": 3,
+            "total": 3,
+            "identifiers": [
+              "return",
+              "!==",
+              "."
+            ]
+          },
+          "operands": {
+            "distinct": 3,
+            "total": 4,
+            "identifiers": [
+              "line",
+              0,
+              "\"#\""
+            ]
+          },
+          "length": 7,
+          "vocabulary": 6,
+          "difficulty": 2,
+          "volume": 18.094737505048094,
+          "effort": 36.18947501009619,
+          "bugs": 0.006031579168349364,
+          "time": 2.0105263894497885
+        }
+      }
+    },
+    {
+      "name": "computeMetrics",
+      "line": 39,
+      "complexity": {
+        "sloc": {
+          "physical": 64,
+          "logical": 24
+        },
+        "cyclomatic": 6,
+        "halstead": {
+          "operators": {
+            "distinct": 15,
+            "total": 65,
+            "identifiers": [
+              "=",
+              "||",
+              "{}",
+              ".",
+              "var",
+              "[]",
+              "()",
+              "function",
+              "if",
+              ">",
+              "+",
+              "&&",
+              ">=",
+              "<",
+              "return"
+            ]
+          },
+          "operands": {
+            "distinct": 38,
+            "total": 79,
+            "identifiers": [
+              "filenames",
+              "options",
+              "<anonymous>",
+              "sort",
+              1,
+              "source",
+              "report",
+              "complexityMetrics",
+              "forEach",
+              "header",
+              "\"File\"",
+              "\"LOC\"",
+              "\"Cyclomatic\"",
+              "\"Halstead difficulty\"",
+              "metrics",
+              "length",
+              0,
+              "sortingColumn",
+              "reverseSort",
+              false,
+              "comparison",
+              {},
+              "test",
+              "substr",
+              "Number",
+              true,
+              "\"invalid sorting column \"",
+              "check",
+              "verifyNumber",
+              "maxColumn",
+              "\"invalid sorting column\"",
+              "console",
+              "assert",
+              "\"sorting metrics by column\"",
+              "log",
+              "debug",
+              "reverse",
+              "concat"
+            ]
+          },
+          "length": 144,
+          "vocabulary": 53,
+          "difficulty": 15.592105263157896,
+          "volume": 824.8205454571007,
+          "effort": 12860.688767982427,
+          "bugs": 0.27494018181903357,
+          "time": 714.482709332357
+        }
+      }
+    },
+    {
+      "name": "<anonymous>",
+      "line": 45,
+      "complexity": {
+        "sloc": {
+          "physical": 10,
+          "logical": 7
+        },
+        "cyclomatic": 1,
+        "halstead": {
+          "operators": {
+            "distinct": 5,
+            "total": 14,
+            "identifiers": [
+              "=",
+              "()",
+              ".",
+              "{}",
+              ":"
+            ]
+          },
+          "operands": {
+            "distinct": 17,
+            "total": 27,
+            "identifiers": [
+              "filename",
+              "source",
+              "\"utf-8\"",
+              "fs",
+              "readFileSync",
+              "\"could not get source from file\"",
+              "check",
+              "verifyString",
+              "report",
+              "getSourceComplexity",
+              "\"could not get complexity for\"",
+              "verifyObject",
+              "<anonymous>",
+              "name",
+              "complexity",
+              "complexityMetrics",
+              "push"
+            ]
+          },
+          "length": 41,
+          "vocabulary": 22,
+          "difficulty": 3.9705882352941173,
+          "volume": 182.83669636412918,
+          "effort": 725.969235563454,
+          "bugs": 0.06094556545470973,
+          "time": 40.33162419796967
+        }
+      }
+    },
+    {
+      "name": "<anonymous>",
+      "line": 59,
+      "complexity": {
+        "sloc": {
+          "physical": 13,
+          "logical": 4
+        },
+        "cyclomatic": 1,
+        "halstead": {
+          "operators": {
+            "distinct": 4,
+            "total": 23,
+            "identifiers": [
+              "()",
+              "[]",
+              ".",
+              "catch"
+            ]
+          },
+          "operands": {
+            "distinct": 16,
+            "total": 29,
+            "identifiers": [
+              "metric",
+              "<anonymous>",
+              "name",
+              "complexity",
+              "aggregate",
+              "sloc",
+              "logical",
+              "cyclomatic",
+              0,
+              "halstead",
+              "difficulty",
+              "toFixed",
+              "metrics",
+              "push",
+              "error",
+              "console"
+            ]
+          },
+          "length": 52,
+          "vocabulary": 20,
+          "difficulty": 3.625,
+          "volume": 224.74026093414287,
+          "effort": 814.6834458862679,
+          "bugs": 0.07491342031138096,
+          "time": 45.26019143812599
+        }
+      }
+    },
+    {
+      "name": "comparison",
+      "line": 76,
+      "complexity": {
+        "sloc": {
+          "physical": 11,
+          "logical": 9
+        },
+        "cyclomatic": 3,
+        "halstead": {
+          "operators": {
+            "distinct": 9,
+            "total": 16,
+            "identifiers": [
+              "var",
+              "=",
+              ".",
+              "if",
+              "else",
+              "<",
+              "return",
+              "- (postfix)",
+              ">"
+            ]
+          },
+          "operands": {
+            "distinct": 7,
+            "total": 15,
+            "identifiers": [
+              "a",
+              "b",
+              "first",
+              "sortingColumn",
+              "second",
+              1,
+              0
+            ]
+          },
+          "length": 31,
+          "vocabulary": 16,
+          "difficulty": 9.642857142857142,
+          "volume": 124,
+          "effort": 1195.7142857142856,
+          "bugs": 0.04133333333333333,
+          "time": 66.42857142857142
+        }
+      }
+    }
+  ],
+  "maintainability": 105.01694942315783
+}
