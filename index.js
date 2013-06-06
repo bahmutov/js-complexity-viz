@@ -16,7 +16,7 @@ program._name = package.name;
 
 program.command('help')
 .description('show help and exit')
-.action(function () {	
+.action(function () {
 	console.log('Complexity metrics:\n\n' + complexityInfo());
 	program.help();
 });
@@ -34,7 +34,7 @@ program.command('changes [filename]')
 		process.exit(0);
 	}
 
-	repoRoot(function(rootFolder) {
+	repoRoot(function (rootFolder) {
 		var relativePaths = files.map(path.relative.bind(this, rootFolder));
 		relativePaths.forEach(reportChange);
 	});
@@ -48,7 +48,7 @@ program.parse(process.argv);
 
 function reportChange(filename) {
 	check.verifyString(filename, 'missing filename');
-	repoRevision(filename, function(contents) {
+	repoRevision(filename, function (contents) {
 		check.verifyString(contents, 'could not get repo for', filename);
 		var repoComplexity = measure.getSourceComplexity(contents, filename);
 		var diskComplexity = measure.getFileComplexity(filename);

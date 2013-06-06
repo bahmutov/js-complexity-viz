@@ -10,39 +10,35 @@ if (module.parent) {
 		metrics: metrics
 	};
 } else {
-	var fs = require("fs");
-	var path = require("path");
-	var check = require('check-types');
-
-	var arguments = require('./src/arguments').run();
-	console.assert(arguments, 'could not find args structure');
+	var args = require('./src/arguments').run();
+	console.assert(args, 'could not find args structure');
 
 	var logger = require('optional-color-logger');
-	logger.init(arguments);
+	logger.init(args);
 
-	console.assert(arguments.path, "empty path");
-	if (!Array.isArray(arguments.path)) {
-		arguments.path = [arguments.path];
+	console.assert(args.path, 'empty path');
+	if (!Array.isArray(args.path)) {
+		args.path = [args.path];
 	}
-	if (!Array.isArray(arguments.skip)) {
-		arguments.skip = [arguments.skip];
+	if (!Array.isArray(args.skip)) {
+		args.skip = [args.skip];
 	}
 
 	if (args.history > 0) {
 		history({
-			filename: arguments.path[0],
-			report: arguments.report,
+			filename: args.path[0],
+			report: args.report,
 			commits: args.history
 		});
 	} else {
 		complexity.run({
-			report: arguments.report,
-			path: arguments.path,
-			colors: arguments.colors,
-			limit: arguments.limit,
-			sort: arguments.sort,
-			minimal: arguments.minimal,
-			skip: arguments.skip
+			report: args.report,
+			path: args.path,
+			colors: args.colors,
+			limit: args.limit,
+			sort: args.sort,
+			minimal: args.minimal,
+			skip: args.skip
 		});
 	}
 }
