@@ -54,7 +54,6 @@ module.exports.run = function () {
 	}
 	if (args.path.length === 0  || args.h || args.help || args["?"]) {
 		optimist.showHelp();
-		console.log(args);
 		process.exit(0);
 	}
 	return args;
