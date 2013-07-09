@@ -1,7 +1,7 @@
-var fs = require("fs");
-var path = require("path");
+var fs = require('fs');
+// var path = require('path');
 var check = require('check-types');
-var colors = require('colors');
+// var colors = require('colors');
 var _ = require('lodash');
 var Vector = require('gauss').Vector;
 var removeMatchingPrefixes = require('./utils').removeMatchingPrefixes;
@@ -19,16 +19,16 @@ function getComplexityInfo() {
 // output complexity report chart to file
 function writeComplexityChart(metrics, filename) {
 	// console.log(metrics);
-	check.verifyString(filename, "output filename " + filename + " should be a string");
-	log.debug("output report filename", filename);
-	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), "utf-8");
-	log.info("Saved metrics to", filename);
+	check.verifyString(filename, 'output filename ' + filename + ' should be a string');
+	log.debug('output report filename', filename);
+	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), 'utf-8');
+	log.info('Saved metrics to', filename);
 }
 
 var Table = require('cli-table');
 function makeTable(titles, rows, colorful, complexityLimit) {
-	console.assert(Array.isArray(titles), "column titles should be an array, not", titles);
-	console.assert(Array.isArray(rows), "rows should be an array, not", rows);
+	console.assert(Array.isArray(titles), 'column titles should be an array, not', titles);
+	console.assert(Array.isArray(rows), 'rows should be an array, not', rows);
 	complexityLimit = complexityLimit || 1000;
 	console.assert(complexityLimit > 0, 'invalid complexity limit', complexityLimit);
 
@@ -46,27 +46,27 @@ function makeTable(titles, rows, colorful, complexityLimit) {
 				'padding-right': 1
 			},
 			chars: {
-				'top': '-'
-				, 'top-mid': '+'
-				, 'top-left': '+'
-				, 'top-right': '+'
-				, 'bottom': '-'
-				, 'bottom-mid': '+'
-				, 'bottom-left': '+' 
-				, 'bottom-right': '+'
-				, 'left': '|'
-				, 'left-mid': '+'
-				, 'mid': '-'
-				, 'mid-mid': '+'
-				, 'right': '|'
-				, 'right-mid': '+'
+				'top': '-',
+				'top-mid': '+',
+				'top-left': '+',
+				'top-right': '+',
+				'bottom': '-',
+				'bottom-mid': '+',
+				'bottom-left': '+',
+				'bottom-right': '+',
+				'left': '|',
+				'left-mid': '+',
+				'mid': '-',
+				'mid-mid': '+',
+				'right': '|',
+				'right-mid': '+'
 			}
 		});
 	}
 
 	var complexityColumn = 2;
 	if (colorful) {
-		rows.forEach(function(row, index) {
+		rows.forEach(function (row, index) {
 			var complexity = row[complexityColumn];
 			if (complexity > complexityLimit) {
 				var redRow = row.map(function(cell) {
@@ -86,8 +86,8 @@ function makeTable(titles, rows, colorful, complexityLimit) {
 
 function writeReportTables(options) {
 	options = options || {};
-	console.assert(Array.isArray(options.metrics), "metrics should be an array, not", options.metrics);
-	console.assert(options.metrics.length >= 1, "invalid complexity length", options.metrics.length);
+	console.assert(Array.isArray(options.metrics), 'metrics should be an array, not', options.metrics);
+	console.assert(options.metrics.length >= 1, 'invalid complexity length', options.metrics.length);
 
 	if (options.metrics.length === 1) {
 		log.log('nothing to report, empty complexity array');
@@ -111,10 +111,10 @@ function writeReportTables(options) {
 		(function () {
 			var table = makeTable(titles, rows, false);
 			console.assert(table, 'could not make plain table');
-			var reportFilename = options.filename.replace(json, ".txt");
+			var reportFilename = options.filename.replace(json, '.txt');
 			var text = table.toString() + '\n' + info;
-			fs.writeFileSync(reportFilename, text, "utf-8");
-			log.info("Saved report text", reportFilename);
+			fs.writeFileSync(reportFilename, text, 'utf-8');
+			log.info('Saved report text', reportFilename);
 		}());
 	}
 

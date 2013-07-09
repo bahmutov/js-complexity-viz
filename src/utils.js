@@ -2,7 +2,7 @@ var check = require('check-types');
 var path = require('path');
 
 // assuming correct path separators, removes only folders
-module.exports.removeMatchingPrefixes = function(rows) {
+module.exports.removeMatchingPrefixes = function (rows) {
 	check.verifyArray(rows, 'expected array, not', JSON.stringify(rows));
 	if (rows.length < 2) {
 		return rows;
@@ -38,7 +38,7 @@ module.exports.removeMatchingPrefixes = function(rows) {
 	// console.log('found common prefix', commonPrefix);
 	if (commonPrefix.length) {
 		console.log(commonPrefix);
-		rows = rows.map(function(row) {
+		rows = rows.map(function (row) {
 			row[column] = row[column].substr(commonPrefix.length);
 			return row;
 		});
@@ -47,7 +47,7 @@ module.exports.removeMatchingPrefixes = function(rows) {
 };
 
 // removes letter by letter without looking at path parts
-module.exports.removePrefixLetters = function(rows) {
+module.exports.removePrefixLetters = function (rows) {
 	check.verifyArray(rows, 'expected array, not', JSON.stringify(rows));
 	if (rows.length < 2) {
 		return rows;

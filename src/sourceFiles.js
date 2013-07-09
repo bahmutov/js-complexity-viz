@@ -11,7 +11,7 @@ function sourceFiles(files) {
 	}
 	check.verifyArray(files, 'expect list of filenames, not ' + JSON.stringify(files));
 
-	var filenames = files.reduce(function(filenames, shortName) {
+	var filenames = files.reduce(function (filenames, shortName) {
 		var files = glob.sync(shortName);
 		return filenames.concat(files);
 	}, []);

@@ -7,7 +7,7 @@ function run(config) {
 
 	var json = /\.json$/i;
 	if (config.report && !config.report.match(json)) {
-		log.error("output report filename", config.report, "is not json");
+		log.error('output report filename', config.report, 'is not json');
 		process.exit(1);
 	}
 
@@ -15,20 +15,20 @@ function run(config) {
 	// console.log('config.path', config.path);
 
 	var allJsFiles = collector.collect(config);
-	console.assert(typeof allJsFiles === 'object', "collector has not returned an object");
+	console.assert(typeof allJsFiles === 'object', 'collector has not returned an object');
 	
-	log.debug("found", Object.keys(allJsFiles).length, "js files");
+	log.debug('found', Object.keys(allJsFiles).length, 'js files');
 	if (log.level < 1) {
 		Object.keys(allJsFiles).forEach(console.log);
 	}
 
 	var files = Object.keys(allJsFiles);
 	var metrics = require('./metrics').computeMetrics(files, config);
-	check.verifyArray(metrics, "complexity metrics not an array");
+	check.verifyArray(metrics, 'complexity metrics not an array');
 
 	// first object - titles
 	var filesN = files.length;
-	console.assert(metrics.length === filesN + 1, "output array size", metrics.length, "!== number of files", filesN);
+	console.assert(metrics.length === filesN + 1, 'output array size', metrics.length, '!== number of files', filesN);
 
 	var reporter = require('./reporter');
 	if (config.report) {
