@@ -33,7 +33,6 @@
     "allong.es": "~0.13.0"
   },
   "devDependencies": {
-    "qunit": "~0.5.16",
     "grunt-bump": "0.0.2",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt": "~0.4.1"
@@ -42,7 +41,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "qunit -c ./test/filenames.js -t ./test/filenames.js",
+    "test": "gt ./test/filenames.js",
     "complexity": "node js-complexity-viz *.js src/*.js"
   },
   "license": "MIT",

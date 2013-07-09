@@ -2,3 +2,5 @@
 /node_modules
 /viz
 /report.json
+/cover
+/test/cover
