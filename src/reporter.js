@@ -21,7 +21,8 @@ function writeComplexityChart(metrics, filename) {
 	// console.log(metrics);
 	check.verifyString(filename, 'output filename ' + filename + ' should be a string');
 	log.debug('output report filename', filename);
-	fs.writeFileSync(filename, JSON.stringify(metrics, null, 2), 'utf-8');
+	var data = JSON.stringify(metrics, null, 2);
+	fs.writeFileSync(filename, data + '\n', 'utf-8');
 	log.info('Saved metrics to', filename);
 }
 
@@ -93,10 +94,6 @@ function writeReportTables(options) {
 		log.log('nothing to report, empty complexity array');
 		return;
 	}
-
-	// console.log(options.metrics);
-
-	
 
 	var info = getComplexityInfo();
 	check.verifyString(info, 'complexity info should be a string, not ' + info);
