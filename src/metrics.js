@@ -1,5 +1,5 @@
-var fs = require("fs");
-var path = require("path");
+var fs = require('fs');
+// var path = require('path');
 var cr = require('complexity-report');
 var check = require('check-types');
 var Complexity = require('./Complexity');
@@ -46,7 +46,7 @@ function getSourceComplexity(source) {
 
 function getFileComplexity(filename) {
 	check.verifyString(filename, 'missing filename');
-	var source = fs.readFileSync(filename, "utf-8");
+	var source = fs.readFileSync(filename, 'utf-8');
 	check.verifyString(source, 'could not get source from file', filename);
 	var report = getSourceComplexity(source, filename);
 	check.verifyObject(report, 'could not get complexity for', filename);
@@ -58,7 +58,7 @@ function computeMetrics(filenames, options) {
 	options = options || {};
 	options.sort = options.sort || 1;
 
-	var source, report;
+	// var source, report;
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
 		var report = getFileComplexity(filename);
@@ -68,7 +68,7 @@ function computeMetrics(filenames, options) {
 		});
 	});
 
-	var header = [["File", "LOC", "Cyclomatic", "Halstead difficulty"]];
+	var header = [['File', 'LOC', 'Cyclomatic', 'Halstead difficulty']];
 	
 	var metrics = [];
 	complexityMetrics.forEach(function(metric) {
