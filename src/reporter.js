@@ -16,12 +16,31 @@ function getComplexityInfo() {
 	return info;
 }
 
+function toNumber(value) {
+	return +value;
+}
+
 // output complexity report chart to file
 function writeComplexityChart(metrics, filename) {
-	// console.log(metrics);
+	check.verifyArray(metrics, 'expected array of metrics');
+
+	// transform array of arrays to object
+	var o = {};
+	metrics.slice(1).forEach(function (measured) {
+		var filename = measured[0];
+		var loc = measured[1];
+		var cyclomatic = measured[2];
+		var halstead = measured[3];
+		o[filename] = {
+			loc: toNumber(loc),
+			cyclomatic: toNumber(cyclomatic),
+			halstead: toNumber(halstead)
+		};
+	});
+
 	check.verifyString(filename, 'output filename ' + filename + ' should be a string');
 	log.debug('output report filename', filename);
-	var data = JSON.stringify(metrics, null, 2);
+	var data = JSON.stringify(o, null, 2);
 	fs.writeFileSync(filename, data + '\n', 'utf-8');
 	log.info('Saved metrics to', filename);
 }
@@ -118,9 +137,6 @@ function writeReportTables(options) {
 	(function () {
 		log.debug('making table, colors?', options.colors, 'complexity limit', options.limit);
 
-		function toNumber(value) {
-			return +value;
-		}
 		// grab values BEFORE they are obscured by terminal colors		
 		// make sure values are numbers
 		var complexities = _.pluck(rows, 2).map(toNumber);
