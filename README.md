@@ -1,6 +1,10 @@
 # JSC (formerly js-complexity-viz)
 
+[![NPM info][nodei.co]](https://npmjs.org/package/jsc)
+
 [![Build status][ci-image]][ci-status]
+[![dependencies][david-dm]][david-dm]
+[![endorse][endorse-image]][endorse-url]
 
 JavaScript source code complexity tool
 
@@ -32,3 +36,7 @@ Gleb Bahmutov <gleb.bahmutov@gmail.com>
 
 [ci-image]: https://secure.travis-ci.org/bahmutov/js-complexity-viz.png?branch=master
 [ci-status]: http://travis-ci.org/#!/bahmutov/js-complexity-viz
+[nodei.co]: https://nodei.co/npm/jsc.png?downloads=true
+[david-dm]: https://david-dm.org/bahmutov/gt.png
+[endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
+[endorse-url]: https://coderwall.com/bahmutov
