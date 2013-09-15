@@ -3,8 +3,9 @@
 [![NPM info][nodei.co]](https://npmjs.org/package/jsc)
 
 [![Build status][ci-image]][ci-status]
-[![dependencies][david-dm]][david-dm]
+[![dependencies][dependencies-image]][dependencies-url]
 [![endorse][endorse-image]][endorse-url]
+[@bahmutov][@bahmutov]
 
 JavaScript source code complexity tool
 
@@ -37,6 +38,8 @@ Gleb Bahmutov <gleb.bahmutov@gmail.com>
 [ci-image]: https://secure.travis-ci.org/bahmutov/js-complexity-viz.png?branch=master
 [ci-status]: http://travis-ci.org/#!/bahmutov/js-complexity-viz
 [nodei.co]: https://nodei.co/npm/jsc.png?downloads=true
-[david-dm]: https://david-dm.org/bahmutov/gt.png
+[dependencies-image]: https://david-dm.org/bahmutov/gt.png
+[dependencies-url]: https://david-dm.org/bahmutov/gt
 [endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
 [endorse-url]: https://coderwall.com/bahmutov
+[@bahmutov]: https://twitter.com/bahmutov
