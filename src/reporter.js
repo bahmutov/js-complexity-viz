@@ -1,7 +1,5 @@
 var fs = require('fs');
-// var path = require('path');
 var check = require('check-types');
-// var colors = require('colors');
 var _ = require('lodash');
 var Vector = require('gauss').Vector;
 var removeMatchingPrefixes = require('./utils').removeMatchingPrefixes;
@@ -11,7 +9,7 @@ var json = /\.json$/i;
 function getComplexityInfo() {
 	var info = 'LOC - lines of code (logical, lower is better)\n' +
 	'Cyclomatic - McCabe complexity (lower is better)\n\thttp://en.wikipedia.org/wiki/Cyclomatic_complexity\n' +
-	'Halstead difficulty (lower is better)\n\thttp://en.wikipedia.org/wiki/Halstead_complexity_measures\n' + 
+	'Halstead difficulty (lower is better)\n\thttp://en.wikipedia.org/wiki/Halstead_complexity_measures\n' +
 	'maintainability (higher is better)\n\thttp://jscomplexity.org/complexity\n';
 	return info;
 }
@@ -49,6 +47,7 @@ var Table = require('cli-table');
 function makeTable(titles, rows, colorful, complexityLimit) {
 	console.assert(Array.isArray(titles), 'column titles should be an array, not', titles);
 	console.assert(Array.isArray(rows), 'rows should be an array, not', rows);
+
 	complexityLimit = complexityLimit || 1000;
 	console.assert(complexityLimit > 0, 'invalid complexity limit', complexityLimit);
 
@@ -61,8 +60,8 @@ function makeTable(titles, rows, colorful, complexityLimit) {
 		table = new Table({
 			head: titles,
 			style: {
-				compact: true, 
-				'padding-left': 1, 
+				compact: true,
+				'padding-left': 1,
 				'padding-right': 1
 			},
 			chars: {
@@ -137,7 +136,7 @@ function writeReportTables(options) {
 	(function () {
 		log.debug('making table, colors?', options.colors, 'complexity limit', options.limit);
 
-		// grab values BEFORE they are obscured by terminal colors		
+		// grab values BEFORE they are obscured by terminal colors
 		// make sure values are numbers
 		var complexities = _.pluck(rows, 2).map(toNumber);
 		var halsteadComplexities = _.pluck(rows, 3).map(toNumber);

@@ -1,6 +1,7 @@
-/report.txt
 /node_modules
-/viz
+/test/cover
+/report.html
 /report.json
 /cover
-/test/cover
+/test/report.json
+/report.txt

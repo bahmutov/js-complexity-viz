@@ -12,7 +12,7 @@ module.exports = {
 
 function getSourceComplexity(source) {
 	check.verifyString(source, 'missing source');
-	
+
 	var report = {
 		aggregate: {
 			complexity: {
@@ -58,10 +58,10 @@ function computeMetrics(filenames, options) {
 	options = options || {};
 	options.sort = options.sort || 1;
 
-	// var source, report;
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
 		var report = getFileComplexity(filename);
+
 		complexityMetrics.push({
 			name: filename,
 			complexity: report
@@ -69,10 +69,9 @@ function computeMetrics(filenames, options) {
 	});
 
 	var header = [['File', 'LOC', 'Cyclomatic', 'Halstead difficulty']];
-	
+
 	var metrics = [];
 	complexityMetrics.forEach(function(metric) {
-		// console.log(metric.complexity.aggregate.complexity);
 		try {
 			metrics.push([
 				metric.name,

@@ -16,7 +16,7 @@ function run(config) {
 
 	var allJsFiles = collector.collect(config);
 	console.assert(typeof allJsFiles === 'object', 'collector has not returned an object');
-	
+
 	log.debug('found', Object.keys(allJsFiles).length, 'js files');
 	if (log.level < 1) {
 		Object.keys(allJsFiles).forEach(console.log);

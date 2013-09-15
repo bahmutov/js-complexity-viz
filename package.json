@@ -8,35 +8,25 @@
     "url": "https://github.com/bahmutov/js-complexity-viz.git"
   },
   "keywords": [
-    "code",
-    "complexity",
-    "code complexity",
-    "js",
-    "javascript"
+    "code", "complexity", "code complexity",
+    "js", "javascript"
   ],
   "dependencies": {
-    "ggit": "0.0.5",
-    "optional-color-logger": "0.0.5",
-    "cli-color": "~0.2.2",
-    "sprintf": "~0.1.1",
-    "optimist": "~0.5.2",
-    "custom-logger": "~0.2.1",
-    "complexity-report": "~0.10.3",
-    "check-types": "~0.6.4",
-    "cli-table": "~0.2.0",
-    "colors": "~0.6.0-1",
-    "glob": "~3.2.1",
-    "gauss": "~0.2.8",
-    "lodash": "~1.2.1",
-    "moment": "~2.0.0",
-    "commander": "~1.1.1",
-    "allong.es": "~0.13.0"
+    "optional-color-logger": "latest",
+    "cli-color": "*",
+    "sprintf": "*",
+    "optimist": "*",
+    "custom-logger": "*",
+    "complexity-report": "*",
+    "check-types": "*",
+    "cli-table": "*",
+    "colors": "*",
+    "glob": "latest",
+    "gauss": "latest",
+    "lodash": "latest"
   },
   "devDependencies": {
-    "grunt-bump": "0.0.2",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt": "~0.4.1",
-    "gt": "~0.8.8"
+      "qunit": "*"
   },
   "engines": {
     "node": ">= 0.8.0"

@@ -9,19 +9,22 @@ function prepareExcludedFilenames(config) {
 		config.skip = [config.skip];
 	}
 	console.assert(Array.isArray(config.skip), 'expected skip to be an array');
-	log.debug('preparing excluded paths', config.skip);
-	config.skip.forEach(function (name, index) {
+
+	log.debug("preparing excluded paths", config.skip);
+	config.skip.forEach(function(name, index) {
 		var fullname = path.resolve(config.path, name);
 		fullname = fullname.toLowerCase();
 		config.skip[index] = fullname;
 	});
-	log.debug('excluded files', config.skip);
+
+	log.debug("excluded files", config.skip);
 }
 
 function isJsExcluded(filename, config) {
 	check.verifyString(filename, 'filename should be a string, not ' + filename);
 	console.assert(config, 'missing config');
-	check.verifyArray(config.skip, 'config.skip should be an array');
+
+	check.verifyArray(config.skip, "config.skip should be an array");
 	if (!config.skip.length) {
 		return false;
 	}
@@ -91,8 +94,24 @@ function collectJsFiles(config) {
 	});
 }
 
+function discoverSourceFiles(files) {
+	console.assert(Array.isArray(files), 'expect list of filenames, not', JSON.stringify(files));
+	var glob = require("glob");
+
+	var filenames = [];
+	files.forEach(function (shortName) {
+		var files = glob.sync(shortName);
+		filenames = filenames.concat(files);
+	});
+
+	filenames = filenames.map(function (shortName) {
+		return path.resolve(shortName);
+	});
+	return filenames;
+}
+
 module.exports = {
-	collect: function (config) {
+	collect: function(config) {
 		console.assert(config, 'missing config');
 		config.skip = config.skip || [];
 
