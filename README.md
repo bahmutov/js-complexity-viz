@@ -5,7 +5,6 @@
 [![Build status][ci-image]][ci-status]
 [![dependencies][dependencies-image]][dependencies-url]
 [![endorse][endorse-image]][endorse-url]
-[@bahmutov][@bahmutov]
 
 JavaScript source code complexity tool
 
@@ -42,4 +41,3 @@ Gleb Bahmutov <gleb.bahmutov@gmail.com>
 [dependencies-url]: https://david-dm.org/bahmutov/gt
 [endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
 [endorse-url]: https://coderwall.com/bahmutov
-[@bahmutov]: https://twitter.com/bahmutov
