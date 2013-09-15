@@ -35,13 +35,14 @@
   "devDependencies": {
     "grunt-bump": "0.0.2",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "gt": "~0.8.8"
   },
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "gt ./test/filenames.js",
+    "test": "node ./node_modules/gt ./test/filenames.js",
     "complexity": "node js-complexity-viz *.js src/*.js"
   },
   "license": "MIT",
