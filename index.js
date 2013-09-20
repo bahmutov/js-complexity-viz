@@ -45,7 +45,6 @@ if (process.argv.length === 2) {
 }
 program.parse(process.argv);
 
-
 function reportChange(filename) {
 	check.verifyString(filename, 'missing filename');
 	repoRevision(filename, function (contents) {
