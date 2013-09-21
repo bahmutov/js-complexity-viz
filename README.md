@@ -37,7 +37,7 @@ Gleb Bahmutov <gleb.bahmutov@gmail.com>
 [ci-image]: https://secure.travis-ci.org/bahmutov/js-complexity-viz.png?branch=master
 [ci-status]: http://travis-ci.org/#!/bahmutov/js-complexity-viz
 [nodei.co]: https://nodei.co/npm/jsc.png?downloads=true
-[dependencies-image]: https://david-dm.org/bahmutov/jsc.png
-[dependencies-url]: https://david-dm.org/bahmutov/jsc
+[dependencies-image]: https://david-dm.org/bahmutov/js-complexity-viz.png
+[dependencies-url]: https://david-dm.org/bahmutov/js-complexity-viz
 [endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
 [endorse-url]: https://coderwall.com/bahmutov
