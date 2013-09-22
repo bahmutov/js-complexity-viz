@@ -1,6 +1,6 @@
 {
   "name": "jsc",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Javascript complexity tool",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -16,27 +16,27 @@
   ],
   "dependencies": {
     "ggit": "0.0.5",
-    "optional-color-logger": "0.0.5",
-    "cli-color": "~0.2.2",
-    "sprintf": "~0.1.1",
-    "optimist": "~0.5.2",
+    "optional-color-logger": "0.0.6",
+    "cli-color": "~0.2.3",
+    "sprintf": "~0.1.2",
+    "optimist": "~0.6.0",
     "custom-logger": "~0.2.1",
-    "complexity-report": "~0.10.3",
+    "complexity-report": "~0.10.5",
     "check-types": "~0.6.4",
     "cli-table": "~0.2.0",
-    "colors": "~0.6.0-1",
-    "glob": "~3.2.1",
+    "colors": "~0.6.2",
+    "glob": "~3.2.6",
     "gauss": "~0.2.8",
-    "lodash": "~1.2.1",
-    "moment": "~2.0.0",
-    "commander": "~1.1.1",
-    "allong.es": "~0.13.0"
+    "lodash": "~2.0.0",
+    "moment": "~2.2.1",
+    "commander": "~2.0.0",
+    "allong.es": "~0.14.0"
   },
   "devDependencies": {
-    "grunt-bump": "0.0.2",
-    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-bump": "0.0.11",
+    "grunt-contrib-jshint": "~0.6.4",
     "grunt": "~0.4.1",
-    "gt": "~0.8.8"
+    "gt": "~0.8.10"
   },
   "engines": {
     "node": ">= 0.8.0"
