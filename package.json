@@ -30,7 +30,8 @@
     "lodash": "~2.0.0",
     "moment": "~2.2.1",
     "commander": "~2.0.0",
-    "allong.es": "~0.14.0"
+    "allong.es": "~0.14.0",
+    "update-notifier": "~0.1.5"
   },
   "devDependencies": {
     "grunt-bump": "0.0.11",

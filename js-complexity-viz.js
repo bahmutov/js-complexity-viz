@@ -46,6 +46,12 @@ if (module.parent) {
 if (module.parent) {
 	module.exports = complexity;
 } else {
+	var updateNotifier = require('update-notifier');
+	var notifier = updateNotifier();
+	if (notifier.update) {
+		notifier.notify();
+	}
+
 	var fs = require("fs");
 	var path = require("path");
 	var check = require('check-types');
