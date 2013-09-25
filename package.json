@@ -27,7 +27,7 @@
     "colors": "~0.6.2",
     "glob": "~3.2.6",
     "gauss": "~0.2.8",
-    "lodash": "~2.0.0",
+    "lodash": "~2.1.0",
     "moment": "~2.2.1",
     "commander": "~2.0.0",
     "allong.es": "~0.14.0",
@@ -37,7 +37,7 @@
     "grunt-bump": "0.0.11",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt": "~0.4.1",
-    "gt": "~0.8.10"
+    "gt": "~0.8.12"
   },
   "engines": {
     "node": ">= 0.8.0"
