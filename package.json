@@ -22,16 +22,16 @@
     "optimist": "~0.6.0",
     "custom-logger": "~0.2.1",
     "complexity-report": "~0.10.5",
-    "check-types": "~0.6.4",
+    "check-types": "~0.6.5",
     "cli-table": "~0.2.0",
     "colors": "~0.6.2",
     "glob": "~3.2.6",
     "gauss": "~0.2.8",
-    "lodash": "~2.1.0",
-    "moment": "~2.2.1",
+    "lodash": "~2.2.1",
+    "moment": "~2.3.1",
     "commander": "~2.0.0",
     "allong.es": "~0.14.0",
-    "update-notifier": "~0.1.5"
+    "update-notifier": "~0.1.6"
   },
   "devDependencies": {
     "grunt-bump": "0.0.11",
