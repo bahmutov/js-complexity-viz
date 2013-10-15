@@ -1,6 +1,6 @@
 {
   "name": "jsc",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Javascript complexity tool",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "repository": {
@@ -43,7 +43,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "node ./node_modules/gt ./test/filenames.js",
+    "test": "node ./node_modules/gt ./test/filenames.js ./test/e2e.js",
     "complexity": "node js-complexity-viz *.js src/*.js"
   },
   "license": "MIT",

@@ -1,6 +1,10 @@
 var check = require('check-types');
 var collector = require('./collector');
 
+if (!global.log) {
+  global.log = console.log;
+}
+
 // returns results object
 function run(config) {
 	config = config || {};
@@ -12,6 +16,9 @@ function run(config) {
 		process.exit(1);
 	}
 
+  if (check.isString(config.path)) {
+    config.path = [config.path];
+  }
 	console.assert(Array.isArray(config.path), 'path should be a list of paths');
 	// console.log('config.path', config.path);
 
