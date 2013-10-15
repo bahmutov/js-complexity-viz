@@ -2,7 +2,8 @@ var check = require('check-types');
 var collector = require('./collector');
 
 if (!global.log) {
-  global.log = console.log;
+  global.log = console;
+  global.log.debug = console.log;
 }
 
 // returns results object
