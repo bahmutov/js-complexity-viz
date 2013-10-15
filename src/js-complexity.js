@@ -34,6 +34,7 @@ function run(config) {
 	var files = Object.keys(allJsFiles);
 	var metrics = require('./metrics').computeMetrics(files, config);
 	check.verifyArray(metrics, 'complexity metrics not an array');
+  var results = arrayToMetrics(metrics);
 
 	// first object - titles
 	var filesN = files.length;
@@ -51,7 +52,7 @@ function run(config) {
 		minimal: config.minimal
 	});
 
-  return arrayToMetrics(metrics);
+  return results;
 }
 
 function arrayToMetrics(metrics) {
