@@ -1,6 +1,7 @@
 var check = require('check-types');
 var collector = require('./collector');
 
+// returns results object
 function run(config) {
 	config = config || {};
 	config.limit = config.limit || 10;
@@ -41,6 +42,26 @@ function run(config) {
 		limit: config.limit,
 		minimal: config.minimal
 	});
+
+  return arrayToMetrics(metrics);
+}
+
+function arrayToMetrics(metrics) {
+  check.verifyArray(metrics, 'expected metrics array');
+  var results = [];
+  metrics.forEach(function (line, index) {
+    if (!index) {
+      // skip first line
+      return;
+    }
+    results.push({
+      filename: line[0],
+      loc: +line[1],
+      cyclomatic: +line[2],
+      difficulty: +line[3]
+    });
+  });
+  return results;
 }
 
 module.exports = {
