@@ -30,6 +30,7 @@ function getSourceComplexity(source) {
 	try {
 		report = cr.run(source);
 	} catch (error) {
+    log.debug('problem computing complexity', error);
 		if (/Line 1:/.test(error)) {
 			var lines = source.split('\n');
 			lines = lines.filter(function (line) {
@@ -55,11 +56,13 @@ function getFileComplexity(filename) {
 
 // returns an array of metrics by file
 function computeMetrics(filenames, options) {
+
 	options = options || {};
 	options.sort = options.sort || 1;
 
 	var complexityMetrics = [];
 	filenames.forEach(function(filename) {
+    log.debug('computing complexity for', filename);
 		var report = getFileComplexity(filename);
 
 		complexityMetrics.push({
