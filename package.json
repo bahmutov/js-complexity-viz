@@ -1,32 +1,26 @@
 {
   "name": "jsc",
-  "version": "0.3.11",
   "description": "Javascript complexity tool",
+  "version": "0.3.11",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bahmutov/js-complexity-viz.git"
+  "bin": "./js-complexity-viz.js",
+  "bugs": {
+    "url": "https://github.com/bahmutov/js-complexity-viz/issues"
   },
-  "keywords": [
-    "code",
-    "complexity",
-    "code complexity",
-    "js",
-    "javascript"
-  ],
+  "contributors": [],
   "dependencies": {
-    "allong.es": "~0.14.0",
+    "allong.es": "0.14.0",
     "check-types": "0.8.1",
     "cli-color": "0.3.2",
     "cli-table": "0.3.1",
-    "colors": "~0.6.2",
+    "colors": "0.6.2",
     "commander": "2.6.0",
-    "complexity-report": "~0.10.5",
+    "complexity-report": "0.10.5",
     "custom-logger": "0.3.0",
     "gauss": "0.2.12",
     "ggit": "0.6.1",
     "glob": "3.2.11",
-    "lodash": "~2.4.1",
+    "lodash": "2.4.1",
     "moment": "2.8.4",
     "optimist": "0.6.1",
     "optional-color-logger": "0.0.6",
@@ -37,17 +31,29 @@
     "grunt": "0.4.5",
     "grunt-bump": "0.0.16",
     "grunt-contrib-jshint": "0.10.0",
+    "grunt-nice-package": "0.9.2",
     "gt": "0.8.47"
   },
   "engines": {
     "node": ">= 0.8.0"
   },
+  "homepage": "https://github.com/bahmutov/js-complexity-viz",
+  "keywords": [
+    "code",
+    "complexity",
+    "code complexity",
+    "js",
+    "javascript"
+  ],
+  "license": "MIT",
+  "main": "./js-complexity-viz.js",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bahmutov/js-complexity-viz.git"
+  },
   "scripts": {
     "test": "node ./node_modules/gt ./test/filenames.js ./test/e2e.js",
     "complexity": "node js-complexity-viz *.js src/*.js"
-  },
-  "license": "MIT",
-  "preferGlobal": "true",
-  "main": "./js-complexity-viz.js",
-  "bin": "./js-complexity-viz.js"
+  }
 }
