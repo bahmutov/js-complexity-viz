@@ -20,7 +20,7 @@
     "gauss": "0.2.12",
     "ggit": "0.6.1",
     "glob": "3.2.11",
-    "lodash": "2.4.1",
+    "lodash": "4.17.15",
     "moment": "2.8.4",
     "optimist": "0.6.1",
     "optional-color-logger": "0.0.6",
